@@ -1,339 +1,431 @@
-
 :root {
-    --fontcolor: black;
-    --detailfontcolor: #0000008f;
-    --bordercolor: #00000010;
-    --buttoncolor1: #1f8a3a;
-    --buttoncolor2: rgb(7, 113, 27);
+    --notify-bg: #e8f4fd;
+    --white: #ffffff;
+    --text: #000;
+    --user-icon: #cb1c3b;
+    --font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    --text-font: -apple-system, BlinkMacSystemFont, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --orange: #f44336;
+    --text-gray: #636363;
+    --text-detail: #0000008a;
+    --border-color: #dfdfe3;
+    --btn-bg: #0A8020;
+    --shadow-color_product: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    --shadow-detail_card: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+    --border-collapse-item_card: #d37684;
 }
 
-* {
-    padding: 0px;
-    margin: 0px;
+.btn {
+    border: none;
 }
 
-                                                                                        /* nav bar styling*/
-/* nav bar styling */
-nav{
-    background-color: white;
+.btn:focus {
+    box-shadow: none;
 }
 
-nav div {
-    display: inline;
+p {
+    margin: 0;
 }
 
-header {
-    background-color: white;
-    box-shadow: 0 0 13px -11px rgba(0, 0, 0, 0.601);
+.w-36 {
+    width: 36px;
 }
 
-/* main logo */
-
-.logo img {
-    height: 30px;
-    margin: 14px 45px;
-}
-.logo img:hover {
-    cursor: pointer;
+.main-container {
+    padding: 0;
 }
 
-/* nav bar main box styling */
+/* header */
+.header-container {
+    height: 64px;
+    padding: 0 18px;
+    background-color: var(--white);
+    border-bottom: 1px solid var(--border-color);
+}
 
-.itembar {
+.header-logo {
+    height: 35px;
+    width: 149px;
+}
+
+.nav-item {
     display: flex;
     align-items: center;
-    font-family: var(--mainfont);
-    border-top: solid var(--bordercolor);
-    border-left: solid var(--bordercolor);
-    border-bottom: solid var(--bordercolor);
-    height: 47px;
-    margin-left: 2vw;
 }
 
-/* nav bar item styling */
+.header-map_icon {
+    color: #b5b6bd;
+    font-size: 20px;
+}
 
-.boxitems {
-    text-decoration: none;
-    color: var(--fontcolor);
+.header-notify_icon {
+    position: relative;
+    color: var(--text);
+    font-size: 20px;
+}
+
+.notification-badge {
+    position: absolute;
+    font-size: 14px;
+    top: -5px;
+    right: -5px;
+    width: 18px;
+    height: 18px;
+    line-height: 18px;
+    border-radius: 50%;
+    text-align: center;
+    color: var(--white);
+    font-family: var(--font-family);
+    background-color: var(--orange);
+}
+
+.header-language {
+    color: var(--orange) !important;
     font-weight: 600;
-    border-right: 0.9px solid var(--bordercolor);
-    padding: 14px 30px 14px 30px;
-    justify-content: center;
-    align-items: center;
+    padding: 12px;
 }
 
-/* Basket styling */
+.header-user {
+    padding: 6px 8px;
+}
 
-.flex-basket {
+.header-user .header-user_icon {
+    font-size: 20px;
+    color: var(--user-icon);
+}
+
+.header-user .header-user_text {
+    padding: 5px !important;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--text) !important;
+}
+
+/* navbar */
+.navbar-container {
+    padding: 0;
+    height: 48px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-container .navbar-nav {
+    height: 100%;
+}
+
+
+.navbar-container .navbar-nav .nav-item {
+    min-width: 130px;
+    line-height: 48px;
+    font-size: 15px;
+    font-weight: bold;
+    color: var(--text-gray);
+    font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.navbar-container .navbar-nav .nav-item.active {
+    color: var(--white);
+    background-size: auto 100%;
+    background-image: url(https://cdn.pizzahut.vn/images/Web_V3/Menu/backgroundCategory.png);
+}
+
+.nav-item .nav-text {
+    width: 100%;
+    text-align: center;
+}
+
+/* Sidebar */
+.cart-container {
+    padding: 0;
+    height: 100vh;
+    align-items: center;
+    position: fixed;
+    right: 0;
+}
+
+.cart {
     display: flex;
     flex-direction: column;
-    float: right;
-    border-left: solid var(--bordercolor);
-    width: 25.3vw;
     height: 100%;
-    background: white;
-    position: fixed;
-    top: 0;
-    right: 0%;
-    box-shadow: 0 0 13px -11px rgba(0, 0, 0, 0.601);
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-/* basket heading ["your basket"] */
+.cart-header {
+    background: #f8f9fa;
+    height: 32px;
+    padding: 0;
+    margin: 0 0 7px;
+}
 
-.flex-basket h2 {
+.cart-header .cart-header_title {
+    font-size: 20px;
+    line-height: 32px;
+    height: 50%;
+}
+
+.cart-content {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 0;
+}
+
+.cart-content .cart-content_notify {
+    font-size: 14px;
+    border: none;
+    border-radius: 0;
+    background-color: var(--notify-bg);
+}
+
+.cart-content .cart-items {
+    padding: 0 5px;
+}
+
+.cart-footer {
+    flex: 0 0 auto;
+    background: #f8f9fa;
+}
+
+.footer-btn_vourcher {
+    padding: 5px;
+}
+
+.footer-btn_vourcher .btn-voucher {
+    width: 100%;
+    background: #fff;
+    color: var(--btn-bg);
+    border: 1px solid var(--btn-bg);
+    padding: 5px;
+}
+
+.cart-footer .add-food {
+    margin: 0;
+    padding: 5px;
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.75;
+    font-weight: 400;
+    font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.carousel-item {
+    padding: 5px;
+}
+
+.cart-items {
+    margin-top: 1rem;
+}
+
+.cart-summary {
+    padding: 0 5px;
+}
+
+.cart-summary p {
+    margin: 0.5rem 0;
     display: flex;
-    margin-top: 37px;
-    font-weight: bolder;
-    font-size: x-large;
-    height: auto;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.flex-basket a {
-    font-size: smaller;
-    margin-top: 55px;
-    padding: 1vw;
-    color: var(--detailfontcolor);
-}
-
-#voucher {
-    color: var(--buttoncolor2);
-    font-size: small;
-    font-weight: bold;
-    margin: 12px;
-    margin-top: 40px;
-    text-align: center;
-    padding: 15px;
-    border: solid rgb(110 110 110 / 4%);
-}
-
-/* basket check out button */
-
-#checkout {
-    font-size: medium;
-    font-weight: bold;
-    text-decoration: none;
-    position: fixed;
-    bottom: 10px;
-    right: 12px;
-    cursor: pointer;
-    background-color: var(--buttoncolor1);
-    color: white;
-    margin-top: 49vh;
-    height: 41px;
-    width: 24vw;
-    border-radius: 6px;
-    border: solid white;
-}
-
-                                                                                    /* Deals menu */
-/* main container background */
-.container {
-    background-image: url(../images/background.jpg);
-}
-
-.flex-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    width: 76vw;
-}
-
-.flex-item {
-    margin: 10px;
-    height: 314px;
-    width: 454px;
-    background-color: white
-}
-
-.flex-item img {
-    width: 454px;
-    height: 185px;
-}
-
- /*deals product info */
-
-.mainname {
-    margin-top: 6px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-left: 10px;
-}
-
-.subdetails {
-    font-size: small;
-    height: 31px;
-    color: var(--detailfontcolor);
-    margin: 7px 11px;
-}
-/* deals price css */
-
-.price {
-    font-size: small;
-    display: flex;
-    align-items: center;
-    height: 50px;
-    margin: 6px 8px;
-    padding-left: 10px;
-    border-top: 0.5px solid var(--bordercolor);
-}
-
-.previouseprice {
-    margin-left: 8px;
-    text-decoration: line-through rgb(191, 13, 13);
-    text-decoration-thickness: 2px;
-    color: rgb(191, 13, 13);
-}
-
-/* deals odering Button css */
-
-.customisebtn {
-    cursor: pointer;
-    font-size: small;
-    text-decoration: none;
-    color: white;
+.cart-summary .value {
     margin-left: auto;
-    height: 35px;
-    width: 12vw;
-    border-radius: 6px;
-    border: solid white;
-    background-color: var(--buttoncolor1);
 }
 
-                                                                                            /* pizza menu */
-/* pizza main heading */
+.btn-checkout {
+    width: 100%;
+    padding: 10px;
+    background: var(--btn-bg);
+    position: relative;
+}
 
-.heading{
-    font-family: system-ui;
+.btn-checkout:hover {
+    background-color: var(--btn-bg);
+}
+
+.footer-btn_checkout .btn-checkout .value {
+    position: absolute;
+    right: 16px;
+}
+
+.footer-btn_checkout {
+    padding: 10px;
+}
+
+.cart-footer .favorite-item {
     display: flex;
-    justify-content: center;
-    width: inherit;
-    font-size: 30px;
-    margin-top: 15px;
-    margin-bottom: 9px;
-}
-
-/*pizza item box styling css  */
-
-.flex-item2{
-    display: flex;
-    flex-wrap: wrap;
-    background-color: white;
-    width: 326px;
-}
-
-div.flex-item2{
-    display: flex;
-    height: 450px;
-    background-color: white;
-    width: 225px;
-    justify-content: flex-start;
-    margin: 10px;
-}
-
-.flex-item2 img{
-    height: 150px;
-    width: 225px;
-}
-
-/* pizza details styling */
-
-.mainname2 {
-    display: flex;
-    font-weight: 600;
-    margin-left: 10px;
-    margin-top: 6px;
-}
-
-.subdetails2 {
-    display: flex;
-    font-size: small;
-    height: 64px;
-    color: var(--detailfontcolor);
-    margin: 23px 2px 31px 10px;
-}
-
-.selectcrust2{
-    margin: 2px 8px;
-    font-size: 15px;
-}
-
-/*button css [add]  */
-
-.customisebtn2 {
-    display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    cursor: pointer;
-    font-size: small;
+}
+
+.favorite-item .favorite-img {
+    height: 66px;
+    width: 85px;
+    border-radius: 5px;
+}
+
+.favorite-item .btn-add {
+    background-color: var(--btn-bg);
+}
+
+.favorite-item .favorite-item_info {
+    flex: 1;
+    display: flex;
+    padding: 5px;
+    margin-left: auto;
+    text-align: left;
+    flex-direction: column;
+}
+
+.favorite-item_name {
+    font-size: 11px;
     font-weight: bold;
+}
+
+.favorite-item_price {
+    font-size: 13px;
+}
+
+
+.carousel-indicators {
+    bottom: -18px;
+}
+
+.carousel-indicators .carousel-indicator_btn {
+    padding: 0;
+    margin: 0 3px;
+    height: 10px;
+    width: 10px;
+    border: none;
+    border-radius: 50%;
+    background: #afafaf;
+}
+
+.carousel-indicators .carousel-indicator_btn.active {
+    background-color: var(--btn-bg);
+}
+
+/* content */
+.main-container .row {
+    width: 100%;
+    margin: 0;
+}
+
+.product-item {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    padding: 6px;
+    height: 338px;
+}
+
+.product-item .combo-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    box-shadow: var(--shadow-color_product);
+
+}
+
+.product-name {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 10px 0;
+}
+
+.product-item_header .product-img {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px 6px 0 0;
+    height: 186px;
+    cursor: pointer;
+}
+
+.product-item .combo-card .card-img-top {
+    border-radius: 0;
+    height: 100%;
+    width: 100%;
+    transition: all 0.5s ease;
+}
+
+.product-item .combo-card .card-img-top:hover {
+    transform: scale(1.1);
+}
+
+.product-item_header .product-name .card-title {
+    margin: 0 5.25px;
+    font-size: 15px;
+    line-height: 1.5;
+    font-weight: bold;
+    color: var(--btn-bg);
+    font-family: var(--text-font);
     text-decoration: none;
-    color: white;
-    padding-left: 74px;
-    height: 41px;
-    width: 222px;
-    border-radius: 9px;
-    border: 4px solid white;
-    background-color: var(--buttoncolor1);
+    text-transform: uppercase;
 }
 
-.price2 {
-    font-size: small;
+.product-name .new-icon {
+    height: 20px;
+    font-size: 0.75rem;
+    color: var(--text);
+    max-width: 50px;
+    font-weight: 700;
+    padding: 2px 3px;
+    background-color: #FFC800;
+    font-family: var(--text-font);
+}
+
+.product-item .combo-card .card-body {
+    padding: 0;
+    justify-content: space-between;
     display: flex;
-    justify-content: end;
-    border-top: 0.5px solid var(--bordercolor);
+    flex-direction: column;
 }
 
-span.sideprice {
-    padding-left: 61px;
+.card-body .card-body_text {
+    height: 60px;
+    padding: 0 10px;
+    font-size: 14px;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-/*pizza item box styling css  */
+.card-body_text .more-link {
+    left: 100%;
+    color: orange;
+    width: max-content;
+    bottom: 0;
+    position: sticky;
+    background-color: #fff;
+    cursor: pointer;
+}
 
-.flex-item3{
+.product-item .card-footer {
     display: flex;
-    flex-wrap: wrap;
-    background-color: white;
-    width: 326px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: var(--white);
 }
 
-div.flex-item3{
-    display: flex;
-    height: 375px;
-    background-color: white;
-    width: 225px;
-    justify-content: flex-start;
-    margin: 10px;
+.card-footer .btn-select_product {
+    font-size: 14px;
+    min-width: 130px;
+    padding: 6px 12px;
+    line-height: 1.75;
+    color: var(--white);
+    text-transform: uppercase;
+    font-family: var(--text-font);
+    background-color: var(--btn-bg);
 }
 
-.flex-item3 img{
-    height: 150px;
-    width: 225px;
+.card-footer .card-footer_item {
+    font-size: 16px;
+    font-family: var(--text-font);
 }
 
-/* pizza icons css */
-
-img.sub-icons{
-    height: 18px;
-    width: 18px;
-    margin: 2px 2px 0px 6px;
-}
-
-img.spice{
-    margin: -4px -2px -5px -2px;
-    height: 31px;
-    width: 31px;
-}
-
-img.new{
-    height: 29px;
-    width: 28px;
-    margin: -1px -1px 0px 4px;
-}
-
-.basketlogo img{
-    position: fixed;
-    margin-left: -3em;
-    height: 26px;
-    width: 33px;
+.card-footer_item .card-footer_price {
+    font-weight: bold;
 }

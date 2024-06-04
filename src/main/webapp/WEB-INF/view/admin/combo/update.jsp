@@ -8,7 +8,7 @@
 
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                <title>User manager</title>
+                <title>Admin manager</title>
 
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
                     integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
@@ -21,18 +21,18 @@
 
                 <script>
                     $(document).ready(() => {
-                        const avatarFile = $("#avatarFile");
-                        const orgImage = "${newUser.avatar}"
+                        const imageFile = $("#imageFile");
+                        const orgImage = "${newCombo.image}"
                         if (orgImage) {
-                            const urlImage = "/admin/images/avatar/" + orgImage;
-                            $("#avatarPreview").attr("src", urlImage);
-                            $("#avatarPreview").css({ "display": "block" });
+                            const urlImage = "/admin/images/combo/" + orgImage;
+                            $("#imagePreview").attr("src", urlImage);
+                            $("#imagePreview").css({ "display": "block" });
                             debugger
                         }
-                        avatarFile.change(function (e) {
+                        imageFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
-                            $("#avatarPreview").attr("src", imgURL);
-                            $("#avatarPreview").css({ "display": "block" });
+                            $("#imagePreview").attr("src", imgURL);
+                            $("#imagePreview").css({ "display": "block" });
                         });
                     });
                 </script>
@@ -49,60 +49,59 @@
                         <!-- MAIN CARDS-->
                         <div class="main-container container col-12 col-md-10 bg-light">
                             <nav aria-label="breadcrumb">
-                                <h1 class="mt-4">Manage Users</h1>
+                                <h1 class="mt-4">Manage combos</h1>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item"><a href="/admin/user">User</a></li>
-                                    <li class="breadcrumb-item active">Update User</li>
+                                    <li class="breadcrumb-item"><a href="/admin/combo">Combo</a></li>
+                                    <li class="breadcrumb-item active">Update combo</li>
                                 </ol>
                             </nav>
 
                             <div class="mt-5">
                                 <div class="d-flex">
-                                    <a class="btn btn-primary mr-2" href="/admin/user">Back</a>
-                                    <h3>Update user with id = ${newUser.id}</h3>
+                                    <a class="btn btn-primary mr-2" href="/admin/combo">Back</a>
+                                    <h3>Update combo with id = ${newCombo.id}</h3>
                                 </div>
                                 <hr />
-                                <div class="mt-3">
-                                    <form:form method="POST" enctype="multipart/form-data" action="/admin/user/update"
-                                        modelAttribute="newUser" class="row">
+                                <div class="w-100 mt-3">
+                                    <form:form method="POST" action="/admin/combo/update" enctype="multipart/form-data"
+                                        modelAttribute="newCombo" class="row">
+
                                         <div class="col-12 col-md-6 form-group d-none">
-                                            <label for="exampleInputPassword1">Id</label>
+                                            <label class="form-label">id:</label>
                                             <form:input path="id" type="text" class="form-control" />
                                         </div>
+
                                         <div class="col-12 col-md-6 form-group">
-                                            <label for="exampleInputEmail1">Email</label>
-                                            <form:input path="email" type="email" class="form-control" />
-                                        </div>
-                                        <div class="col-12 col-md-6 form-group">
-                                            <label for="pwd" class="form-label">Full name:</label>
-                                            <form:input path="fullName" type="text" class="form-control" />
+                                            <label class="form-label">Name:</label>
+                                            <form:input path="name" type="text" class="form-control" />
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
-                                            <label for="exampleInputPassword1">Address</label>
-                                            <form:input path="address" type="text" class="form-control" />
+                                            <label class="form-label">Short name:</label>
+                                            <form:input path="shortName" type="text" class="form-control" />
                                         </div>
+                                        <div class="col-12 col-md-12 form-group">
+                                            <label class="form-label">Detail description:</label>
+                                            <form:textarea path="detailDesc" type="text" class="form-control" />
+                                        </div>
+
                                         <div class="col-12 col-md-6 form-group">
-                                            <label for="exampleInputPassword1">Phone</label>
-                                            <form:input path="phone" type="text" class="form-control" />
+                                            <label for="imageFile" class="form-label">combo image:</label>
+                                            <input name="file" class="form-control" type="file" id="imageFile">
                                         </div>
+
                                         <div class="col-12 col-md-6 form-group">
-                                            <label for="avatarFile">Avatar</label>
-                                            <input name="file" type="file" class="form-control-file" id="avatarFile" />
+                                            <label class="form-label">Price:</label>
+                                            <form:input path="price" type="text" class="form-control" />
                                         </div>
-                                        <div class="col-12 col-md-6">
-                                            <label class="form-label d-block">Role:</label>
-                                            <form:select class="form-select" path="role.name">
-                                                <form:option value="ADMIN">ADMIN</form:option>
-                                                <form:option value="USER">USER</form:option>
-                                            </form:select>
+
+                                        <div class="col-12 col-md-6 mb-3 ">
+                                            <img src="" style="max-height: 250px; display: none;" alt="image preview"
+                                                id="imagePreview">
                                         </div>
-                                        <div class="col-12 mb-3">
-                                            <img src="" style="max-height: 250px; display: none;" alt="avatar preview"
-                                                id="avatarPreview">
-                                        </div>
-                                        <div class="col-12 mb-5">
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+
+                                        <div class="col-12 mb-5 ">
+                                            <button type="submit" class="btn btn-success">Submit</button>
                                         </div>
                                     </form:form>
                                 </div>

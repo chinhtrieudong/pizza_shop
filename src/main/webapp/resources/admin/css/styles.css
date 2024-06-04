@@ -1,7 +1,24 @@
 .viewport-max {
     min-height: 100vh;
 }
-.sidebar {
+
+.sidebar-container {
+    margin-top: 67.8px;
     border-right: 1px solid rgba(0, 0, 0, .2);
 }
 
+.main-container {
+    margin-top: 57.8px;
+}
+
+.header-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.admin-logo {
+    line-height: 41px;
+}

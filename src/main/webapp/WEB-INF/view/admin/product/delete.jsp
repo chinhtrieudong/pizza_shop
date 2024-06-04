@@ -30,24 +30,24 @@
                         <!-- MAIN CARDS-->
                         <div class="main-container container col-12 col-md-10 bg-light">
                             <nav aria-label="breadcrumb">
-                                <h1 class="mt-4">Manage Users</h1>
+                                <h1 class="mt-4">Manage products</h1>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item"><a href="/admin/user">User</a></li>
-                                    <li class="breadcrumb-item active">Delete User</li>
+                                    <li class="breadcrumb-item"><a href="/admin/product">Product</a></li>
+                                    <li class="breadcrumb-item active">Delete product</li>
                                 </ol>
                             </nav>
 
                             <div class="mt-5">
                                 <div class="d-flex">
                                     <a class="btn btn-primary mr-2" href="/admin/product">Back</a>
-                                    <h3>Delete user with id = ${user.id}</h3>
+                                    <h3>Delete product with id = ${product.id}</h3>
                                 </div>
                                 <hr />
                                 <div class="mt-3">
-                                    <form:form method="POST" action="/admin/user/delete" modelAttribute="user">
+                                    <form:form method="POST" action="/admin/product/delete" modelAttribute="product">
                                         <form:input type="text" path="id" class="d-none" />
-                                        <p>Bạn có chắc là muốn xóa user này không?</p>
+                                        <p>Bạn có chắc là muốn xóa product này không?</p>
                                         <div class="col-12 mb-5">
                                             <button type="submit" class="btn btn-danger">Submit</button>
                                         </div>
