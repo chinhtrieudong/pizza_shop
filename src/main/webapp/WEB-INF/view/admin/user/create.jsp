@@ -57,44 +57,72 @@
                                 <div class="w-100 mt-3">
                                     <form:form method="POST" enctype="multipart/form-data" action="/admin/user/create"
                                         modelAttribute="newUser" class="row">
+                                        <!-- form error -->
+                                        <c:set var="emailError">
+                                            <form:errors path="email" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="passwordError">
+                                            <form:errors path="password" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="fullNameError">
+                                            <form:errors path="fullName" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="addressError">
+                                            <form:errors path="address" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="phoneError">
+                                            <form:errors path="phone" cssClass="invalid-feedback" />
+                                        </c:set>
+
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="exampleInputEmail1">Email address</label>
-                                            <form:input path="email" type="email" class="form-control"
+                                            <form:input path="email" type="email"
+                                                class="form-control ${not empty emailError ? 'is-invalid' : ''}"
                                                 placeholder="user@gmail.com" />
+                                            ${emailError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="exampleInputPassword1">Password</label>
-                                            <form:input path="password" type="password" class="form-control"
+                                            <form:input path="password" type="password"
+                                                class="form-control ${not empty passwordError ? 'is-invalid' : ''}"
                                                 placeholder="Password" />
+                                            ${passwordError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="pwd" class="form-label">Full name:</label>
-                                            <form:input path="fullName" type="text" class="form-control"
-                                                placeholder="Orochi" />
+                                            <form:input path="fullName" type="text"
+                                                class="form-control ${not empty fullNameError ? 'is-invalid' : ''}"
+                                                placeholder="Peter" />
+                                            ${fullNameError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="exampleInputPassword1">Address</label>
-                                            <form:input path="address" type="text" class="form-control"
-                                                placeholder="Quảng Trị" />
+                                            <form:input path="address" type="text"
+                                                class="form-control ${not empty addressError ? 'is-invalid' : ''}"
+                                                placeholder="Tokyo" />
+                                            ${addressError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="exampleInputPassword1">Phone</label>
-                                            <form:input path="phone" type="text" class="form-control"
+                                            <form:input path="phone" type="text"
+                                                class="form-control ${not empty phoneError ? 'is-invalid' : ''}"
                                                 placeholder="053 3663 536" />
+                                            ${phoneError}
                                         </div>
 
                                         <div class="col-12 col-md-6">
                                             <label class="form-label">Role:
                                             </label>
                                             <form:select class="form-select" path="role.name">
-                                                <form:option value="ADMIN">ADMIN</form:option>
                                                 <form:option value="USER">USER</form:option>
+                                                <form:option value="ADMIN">ADMIN</form:option>
                                             </form:select>
                                         </div>
 
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="avatarFile">Avatar</label>
                                             <input name="file" type="file" class="form-control-file" id="avatarFile" />
+
                                         </div>
 
                                         <div class="col-12 mb-3 ">

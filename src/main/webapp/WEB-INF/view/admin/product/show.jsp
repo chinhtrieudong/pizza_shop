@@ -41,7 +41,6 @@
                                     <div>
                                         <a href="/admin/product/create" class="btn btn-primary">Create product
                                         </a>
-                                        <a href="/admin/combo/create" class="btn btn-outline-success">Create combo</a>
                                     </div>
                                 </div>
                                 <hr />

@@ -188,6 +188,12 @@
     background-color: var(--btn-bg);
 }
 
+.btn-select:hover {
+    color: #fff;
+    background-color: #0A8020;
+    box-shadow: var(--shadow-detail_card);
+}
+
 /* button add to cart */
 .btn-add_cart {
     width: 100%;

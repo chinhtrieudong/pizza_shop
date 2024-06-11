@@ -1,6 +1,5 @@
 package vn.chinh.pizzahut.domain;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,6 +7,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
@@ -16,15 +20,25 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Email(message = "Email is not valid", regexp = "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$")
     private String email;
+
+    @NotNull(message = "Password cannot be null")
+    @Size(min = 3, message = "Password must be at least 3 characters long")
     private String password;
+
+    @NotEmpty(message = "Full name cannot be empty")
     private String fullName;
+    @NotEmpty(message = "Address cannot be empty")
     private String address;
+    @Size(min = 3, message = "Phone number is not valid")
     private String phone;
+
     private String avatar;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "role_id")
+    @Valid
     private Role role;
 
     public User(long id, String email, String password, String fullName, String address, String phone, String avatar,

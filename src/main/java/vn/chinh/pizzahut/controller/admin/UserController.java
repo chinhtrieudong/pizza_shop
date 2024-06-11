@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import jakarta.validation.Valid;
 import vn.chinh.pizzahut.domain.User;
 import vn.chinh.pizzahut.service.UploadService;
 import vn.chinh.pizzahut.service.UserService;
@@ -45,14 +48,23 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String handleCreateUser(@ModelAttribute("newUser") User newUser, @RequestParam("file") MultipartFile file) {
+    public String handleCreateUser(@ModelAttribute("newUser") @Valid User newUser, BindingResult newUserBindingResult,
+            @RequestParam("file") MultipartFile file) {
 
+        List<FieldError> errors = newUserBindingResult.getFieldErrors();
+        for (FieldError error : errors) {
+            System.out.println(error.getField() + "-" + error.getDefaultMessage());
+        }
+
+        if (newUserBindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
         String avatar = uploadService.handleUploadFile(file, "avatar");
         String hashPassword = passwordEncoder.encode(newUser.getPassword());
 
         newUser.setPassword(hashPassword);
         newUser.setAvatar(avatar);
-        newUser.setRole(this.userService.fetchRoleByName(newUser.getRole().getName()).get());
+        newUser.setRole(this.userService.fetchRoleByName(newUser.getRole().getName()));
         this.userService.handleSaveUser(newUser);
 
         return "redirect:/admin/user";
@@ -66,7 +78,17 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String handleUpdateUser(@ModelAttribute("newUser") User user, @RequestParam("file") MultipartFile file) {
+    public String handleUpdateUser(@ModelAttribute("newUser") @Valid User user, BindingResult newUseBindingResult,
+            @RequestParam("file") MultipartFile file) {
+        List<FieldError> errors = newUseBindingResult.getFieldErrors();
+
+        for (FieldError error : errors) {
+            System.out.println(">>>" + error.getField() + " - " + error.getDefaultMessage());
+        }
+        if (newUseBindingResult.hasErrors()) {
+            return "admin/user/update";
+        }
+
         User curUser = this.userService.fetchUserById(user.getId());
         String fileName = this.uploadService.handleUploadFile(file, "avatar");
 

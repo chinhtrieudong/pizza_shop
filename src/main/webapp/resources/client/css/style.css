@@ -23,6 +23,14 @@
     box-shadow: none;
 }
 
+.btn:hover {
+    color: var(--white);
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 p {
     margin: 0;
 }
@@ -37,6 +45,8 @@ p {
 
 /* header */
 .header-container {
+    position: fixed;
+    width: 100%;
     height: 64px;
     padding: 0 18px;
     background-color: var(--white);
@@ -326,7 +336,7 @@ p {
 
 }
 
-.product-name {
+.product-item_header .product-name {
     display: flex;
     justify-content: space-between;
     padding: 2px 10px 0;
@@ -337,7 +347,6 @@ p {
     overflow: hidden;
     border-radius: 6px 6px 0 0;
     height: 186px;
-    cursor: pointer;
 }
 
 .product-item .combo-card .card-img-top {
@@ -356,7 +365,7 @@ p {
     font-size: 15px;
     line-height: 1.5;
     font-weight: bold;
-    color: var(--btn-bg);
+    color: var(--text);
     font-family: var(--text-font);
     text-decoration: none;
     text-transform: uppercase;
@@ -381,6 +390,7 @@ p {
 }
 
 .card-body .card-body_text {
+    position: relative;
     height: 60px;
     padding: 0 10px;
     font-size: 14px;
@@ -393,11 +403,12 @@ p {
 }
 
 .card-body_text .more-link {
+    position: sticky;
+    display: none;
+    bottom: 0;
     left: 100%;
     color: orange;
     width: max-content;
-    bottom: 0;
-    position: sticky;
     background-color: #fff;
     cursor: pointer;
 }
@@ -428,4 +439,63 @@ p {
 
 .card-footer_item .card-footer_price {
     font-weight: bold;
+}
+
+
+/* Register form */
+.register-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url(/admin/images/product/background.jpg);
+}
+
+.register-container .container {
+    padding: 0;
+    width: 770px;
+    background: #fff;
+    box-shadow: var(--shadow-detail_card);
+}
+
+.register-panel {
+    width: 100%;
+}
+
+.register-form {
+    padding: 15px;
+}
+
+.register-btn {
+    font-size: 14px;
+    text-transform: uppercase;
+    width: 50%;
+    color: var(--white);
+    background-color: var(--btn-bg);
+    box-shadow: var(--shadow-color_product);
+}
+
+/* Login */
+.login-panel {
+    width: 100%;
+    height: 100%;
+}
+
+.login-title {
+    padding-top: 20px;
+    color: #A80000;
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.login-content {
+    background-color: var(--white);
+}
+
+.login-form {
+    padding-top: 40px;
 }

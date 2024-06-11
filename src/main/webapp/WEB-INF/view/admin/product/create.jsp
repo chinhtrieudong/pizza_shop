@@ -57,26 +57,54 @@
                                 <div class="w-100 mt-3">
                                     <form:form method="POST" action="/admin/product/create"
                                         enctype="multipart/form-data" modelAttribute="newProduct" class="row">
+                                        <!--  -->
+                                        <c:set var="nameError">
+                                            <form:errors path="name" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="priceError">
+                                            <form:errors path="price" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="quantityError">
+                                            <form:errors path="quantity" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="imageError">
+                                            <form:errors path="image" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="detailDescError">
+                                            <form:errors path="detailDesc" cssClass="invalid-feedback" />
+                                        </c:set>
+
                                         <div class="col-12 col-md-6 form-group">
                                             <label class="form-label">Name:</label>
-                                            <form:input path="name" type="name" class="form-control" />
+                                            <form:input path="name" type="name"
+                                                class="form-control ${not empty nameError ? 'is-invalid' : ''}" />
+                                            ${nameError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label class="form-label">Price:</label>
-                                            <form:input path="price" type="text" class="form-control" />
+                                            <form:input path="price" type="text"
+                                                class="form-control ${not empty priceError ? 'is-invalid' : ''}" />
+                                            ${priceError}
                                         </div>
                                         <div class="col-12 col-md-12 form-group">
                                             <label class="form-label">Detail description:</label>
-                                            <form:textarea path="detailDesc" type="text" class="form-control" />
+                                            <form:textarea path="detailDesc" type="text"
+                                                class="form-control ${not empty detailDescError ? 'is-invalid' : ''}" />
+                                            ${detailDescError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label class="form-label">Quantity:</label>
-                                            <form:input path="quantity" type="text" class="form-control" />
+                                            <form:input path="quantity" type="text"
+                                                class="form-control ${not empty quantityError ? 'is-invalid' : ''}" />
+                                            ${quantityError}
                                         </div>
 
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="imageFile" class="form-label">Product image:</label>
-                                            <input name="file" class="form-control" type="file" id="imageFile">
+                                            <input name="file"
+                                                class="form-control ${not empty imageError ? 'is-invalid' : ''}"
+                                                type="file" id="imageFile">
+                                            ${imageError}
                                         </div>
 
                                         <div class="col-12 col-md-3 d-flex align-items-start">
@@ -86,18 +114,17 @@
                                                 <form:option value="PIZZA">PIZZA</form:option>
                                                 <form:option value="CHICKEN">CHICKEN</form:option>
                                                 <form:option value="APPETIZER">APPETIZER</form:option>
-                                                <form:option value="BEVERAGE">BEVERAGE</form:option>
+                                                <form:option value="DRINK">DRINK</form:option>
                                             </form:select>
                                         </div>
 
                                         <div class="col-12 col-md-3 d-flex align-items-start">
                                             <label class="form-label m-0 mr-2 ">Combo:
                                             </label>
-                                            <form:select class="form-select w-100" path="combo.name">
-                                                <form:option value="SUONGSUONG">COMBO CHẤM SƯƠNG SƯƠNG</form:option>
-                                                <form:option value="VUAVAN">COMBO CHẤM VỪA VẶN</form:option>
-                                                <form:option value="NONE">COMBO CHẤM NO NÊ</form:option>
-                                                <form:option value="PHUPHE">COMBO CHẤM PHỦ PHÊ</form:option>
+                                            <form:select class="form-select w-100" path="combo.shortName">
+                                                <c:forEach var="combo" items="${combos}">
+                                                    <form:option value="${combo.shortName}">${combo.name}</form:option>
+                                                </c:forEach>
                                             </form:select>
                                         </div>
 

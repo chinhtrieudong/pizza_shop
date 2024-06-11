@@ -14,4 +14,9 @@ public interface ComboRepository extends JpaRepository<Combo, Long> {
     Combo save(Combo combo);
 
     Combo findById(long id);
+
+    Combo findByShortName(String shortName);
+
+    void deleteById(long id);
+
 }

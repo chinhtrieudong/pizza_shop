@@ -87,7 +87,8 @@
 
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="imageFile" class="form-label">combo image:</label>
-                                            <input name="file" class="form-control" type="file" id="imageFile">
+                                            <input name="file" class="form-control" type="file" id="imageFile"
+                                                accept=".png, .jpg, .jpeg">
                                         </div>
 
                                         <div class="col-12 col-md-6 form-group">

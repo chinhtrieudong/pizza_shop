@@ -68,14 +68,29 @@ public class ComboController {
         Combo curCombo = this.comboService.fetchById(newCombo.getId());
 
         if (curCombo != null) {
+            if (!file.isEmpty()) {
+                curCombo.setImage(this.uploadService.handleUploadFile(file, "combo"));
+            }
             curCombo.setName(newCombo.getName());
             curCombo.setDetailDesc(newCombo.getDetailDesc());
-            curCombo.setImage(this.uploadService.handleUploadFile(file, "combo"));
             curCombo.setPrice(newCombo.getPrice());
             curCombo.setShortName(newCombo.getShortName());
 
-            this.comboService.saveCombo(newCombo);
+            this.comboService.saveCombo(curCombo);
         }
+        return "redirect:/admin/combo";
+    }
+
+    @GetMapping("/admin/combo/delete/{id}")
+    public String getComboDeletePage(@PathVariable long id, Model model) {
+        Combo combo = this.comboService.fetchById(id);
+        model.addAttribute("combo", combo);
+        return "admin/combo/delete";
+    }
+
+    @PostMapping("/admin/combo/delete")
+    public String postMethodName(@ModelAttribute("combo") Combo combo) {
+        this.comboService.handleDeleteById(combo.getId());
         return "redirect:/admin/combo";
     }
 

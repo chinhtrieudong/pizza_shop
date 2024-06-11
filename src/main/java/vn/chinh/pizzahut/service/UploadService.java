@@ -18,6 +18,7 @@ public class UploadService {
     }
 
     public String handleUploadFile(MultipartFile file, String targetFolder) {
+        // don't upload file
         if (file.isEmpty()) {
             return "";
         }

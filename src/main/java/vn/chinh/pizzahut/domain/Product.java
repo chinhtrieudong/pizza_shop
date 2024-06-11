@@ -1,6 +1,6 @@
 package vn.chinh.pizzahut.domain;
 
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,6 +8,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "products")
@@ -15,15 +17,22 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotEmpty(message = "Name cannot be empty")
     private String name;
+    @NotNull(message = "price cannot be empty")
     private double price;
+    @NotNull(message = "quantity cannot be empty")
     private int quantity;
     private String category;
-    private String image;
-    private int sold;
-    private String detailDesc;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    private String image;
+    @NotEmpty(message = "detailDesc cannot be empty")
+    @Column(columnDefinition = "MEDIUMTEXT")
+    private String detailDesc;
+    private int sold;
+
+    @ManyToOne
     @JoinColumn(name = "combo_id")
     private Combo combo;
 

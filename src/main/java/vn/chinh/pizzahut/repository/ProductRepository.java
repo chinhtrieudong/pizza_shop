@@ -3,6 +3,7 @@ package vn.chinh.pizzahut.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import vn.chinh.pizzahut.domain.Combo;
 import vn.chinh.pizzahut.domain.Product;
 
 import java.util.List;
@@ -14,6 +15,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findAll();
 
     Product findById(long id);
+
+    List<Product> findByCategoryAndCombo(String category, Combo combo);
 
     void deleteById(long id);
 }

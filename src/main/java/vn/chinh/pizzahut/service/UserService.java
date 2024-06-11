@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import vn.chinh.pizzahut.domain.Role;
 import vn.chinh.pizzahut.domain.User;
+import vn.chinh.pizzahut.domain.dto.RegisterDTO;
 import vn.chinh.pizzahut.repository.RoleRepository;
 import vn.chinh.pizzahut.repository.UserRepository;
 
@@ -28,7 +29,7 @@ public class UserService {
         return this.userRepository.findAll();
     }
 
-    public Optional<Role> fetchRoleByName(String name) {
+    public Role fetchRoleByName(String name) {
         return this.roleRepository.findByName(name);
     }
 
@@ -38,5 +39,17 @@ public class UserService {
 
     public void handleDeleteUserById(long id) {
         this.userRepository.deleteById(id);
+    }
+
+    public User RegisterDTOtoUser(RegisterDTO registerDTO) {
+        User newUser = new User();
+        newUser.setFullName(registerDTO.getFirstName() + " " + registerDTO.getLastName());
+        newUser.setEmail(registerDTO.getEmail());
+        newUser.setAddress(registerDTO.getAddress());
+        return newUser;
+    }
+
+    public boolean checkEmailExists(String email) {
+        return this.userRepository.existsByEmail(email);
     }
 }

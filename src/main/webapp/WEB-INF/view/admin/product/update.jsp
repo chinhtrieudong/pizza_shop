@@ -64,7 +64,7 @@
                                 </div>
                                 <hr />
                                 <div class="w-100 mt-3">
-                                    <form:form method="POST" action="/admin/product/create"
+                                    <form:form method="POST" action="/admin/product/update"
                                         enctype="multipart/form-data" modelAttribute="newProduct" class="row">
                                         <div class="col-12 col-md-6 form-group d-none">
                                             <label class="form-label">Id:</label>
@@ -106,11 +106,11 @@
                                         <div class="col-12 col-md-3 d-flex align-items-start">
                                             <label class="form-label m-0 mr-2">Combo:
                                             </label>
-                                            <form:select class="form-select w-100" path="category">
-                                                <form:option value="SUONGSUONG">COMBO CHẤM SƯƠNG SƯƠNG</form:option>
-                                                <form:option value="VUAVAN">COMBO CHẤM VỪA VẶN</form:option>
-                                                <form:option value="NONE">COMBO CHẤM NO NÊ</form:option>
-                                                <form:option value="PHUPHE">COMBO CHẤM PHỦ PHÊ</form:option>
+                                            <form:select class="form-select w-100" path="combo.shortName">
+                                                <form:option value="COMBOSS">COMBO CHẤM SƯƠNG SƯƠNG</form:option>
+                                                <form:option value="COMBOVV">COMBO CHẤM VỪA VẶN</form:option>
+                                                <form:option value="COMBONN">COMBO CHẤM NO NÊ</form:option>
+                                                <form:option value="COMBOPP">COMBO CHẤM PHỦ PHÊ</form:option>
                                             </form:select>
                                         </div>
 

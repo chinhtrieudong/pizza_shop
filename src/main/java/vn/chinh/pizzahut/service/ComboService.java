@@ -26,4 +26,12 @@ public class ComboService {
     public Combo fetchById(long id) {
         return this.comboRepository.findById(id);
     }
+
+    public void handleDeleteById(long id) {
+        this.comboRepository.deleteById(id);
+    }
+
+    public Combo fetchComboByShortName(String shortName) {
+        return this.comboRepository.findByShortName(shortName);
+    }
 }

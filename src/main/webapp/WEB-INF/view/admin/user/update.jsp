@@ -70,21 +70,44 @@
                                             <label for="exampleInputPassword1">Id</label>
                                             <form:input path="id" type="text" class="form-control" />
                                         </div>
+
+                                        <!-- form error -->
+                                        <c:set var="emailError">
+                                            <form:errors path="email" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="fullNameError">
+                                            <form:errors path="fullName" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="addressError">
+                                            <form:errors path="address" cssClass="invalid-feedback" />
+                                        </c:set>
+                                        <c:set var="phoneError">
+                                            <form:errors path="phone" cssClass="invalid-feedback" />
+                                        </c:set>
+
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="exampleInputEmail1">Email</label>
-                                            <form:input path="email" type="email" class="form-control" />
+                                            <form:input path="email" type="email"
+                                                class="form-control ${not empty emailError ? 'is-invalid' : ''}" />
+                                            ${emailError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="pwd" class="form-label">Full name:</label>
-                                            <form:input path="fullName" type="text" class="form-control" />
+                                            <form:input path="fullName" type="text"
+                                                class="form-control ${not empty fullNameError ? 'is-invalid' : ''}" />
+                                            ${fullNameError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="exampleInputPassword1">Address</label>
-                                            <form:input path="address" type="text" class="form-control" />
+                                            <form:input path="address" type="text"
+                                                class="form-control ${not empty addressError ? 'is-invalid' : ''}" />
+                                            ${addressError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="exampleInputPassword1">Phone</label>
-                                            <form:input path="phone" type="text" class="form-control" />
+                                            <form:input path="phone" type="text"
+                                                class="form-control ${not empty phoneError ? 'is-invalid' : ''}" />
+                                            ${phoneError}
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
                                             <label for="avatarFile">Avatar</label>
