@@ -40,7 +40,7 @@ public class HomePageController {
         this.productService = productService;
     }
 
-    @GetMapping("/menu")
+    @GetMapping("/")
     public String getMenuPage(Model model) {
         List<Combo> combos = this.comboService.fetchAllCombos();
         model.addAttribute("combos", combos);
@@ -87,7 +87,7 @@ public class HomePageController {
         newUser.setRole(this.userService.fetchRoleByName("USER"));
 
         this.userService.handleSaveUser(newUser);
-        return "redirect:/menu";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")

@@ -43,8 +43,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <img src="/admin/images/combo/${combo.image}" class="img-fluid"
-                                            alt="combo Image">
+                                        <img src="/images/combo/${combo.image}" class="img-fluid" alt="combo Image">
                                     </div>
                                     <div class="col-md-8">
                                         <h4>Name: <span>${combo.name}</span></h4>

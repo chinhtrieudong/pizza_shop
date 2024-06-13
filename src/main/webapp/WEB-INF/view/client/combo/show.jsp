@@ -27,7 +27,7 @@
                                         <div class="combo-card">
                                             <a href="/menu/combo/${combo.id}" class="product-item_header">
                                                 <div class="product-img">
-                                                    <img src="/admin/images/combo/${combo.image}" alt="Combo Image"
+                                                    <img src="/images/combo/${combo.image}" alt="Combo Image"
                                                         class="card-img-top">
                                                 </div>
 

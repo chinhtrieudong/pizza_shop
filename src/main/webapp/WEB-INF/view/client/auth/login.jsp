@@ -16,38 +16,36 @@
             </head>
 
             <body>
-                <jsp:include page="../layout/header.jsp" />
-                <div class="register-container">
-                    <div class="container">
-                        <div class="row">
-                            <img class="login-panel col-md-6 p-0" src="/admin/images/panel-login.jpg" alt="">
+                <div class="auth-wrapper">
+                    <jsp:include page="../layout/header.jsp" />
+                    <div class="register-container">
+                        <div class="row container">
+                            <img class="login-panel col-md-6 p-0" src="/client/images/panel-login.jpg" alt="">
                             <div class="login-content col-md-6 col-12 p-0">
                                 <p class="login-title">🍕🍕 WELCOME BACK!</p>
-                                <form:form class="login-form " method="post" action="/login" modelAttribute="user">
-                                    <!-- <c:set var="emailError">
-                                        <form:errors path="email" cssClass="invalid-feedback" />
-                                    </c:set>
-                                    <c:set var="passwordError">
-                                        <form:errors path="password" cssClass="invalid-feedback" />
-                                    </c:set> -->
-
+                                <form class="login-form " method="post" action="/login" modelAttribute="user">
+                                    <c:if test="${param.error != null}">
+                                        <div class="col-12 my-2 text-center" style="color: red;">Invalid email or
+                                            password!
+                                        </div>
+                                    </c:if>
                                     <div class="form-group col-12">
                                         <label class="font-weight-bold">Email *</label>
-                                        <form:input path="email" type="email"
-                                            class="form-control ${not empty emailError ? 'is-invalid' : ''}" />
-                                        <!-- ${emailError} -->
+                                        <input name="username" type="email" class="form-control " />
                                     </div>
                                     <div class="form-group col-12">
                                         <label class="font-weight-bold">Password *</label>
-                                        <form:input path="password" type="password"
-                                            class="form-control ${not empty passwordError ? 'is-invalid' : ''}" />
-                                        <!-- ${passwordError} -->
+                                        <input name="password" type="password" class="form-control " />
+                                    </div>
+
+                                    <div>
+                                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     </div>
 
                                     <div class="w-100 d-flex justify-content-center">
                                         <button type="submit" class="btn register-btn">Login</button>
                                     </div>
-                                </form:form>
+                                </form>
                             </div>
                         </div>
                     </div>

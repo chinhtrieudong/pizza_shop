@@ -19,7 +19,7 @@
                 <div class="detail-container container-fluid">
                     <jsp:include page="../layout/header.jsp" />
                     <div class="container main-container">
-                        <a class="btn-back" href="/menu">
+                        <a class="btn-back" href="/">
                             <i class="back-icon fas fa-less-than"></i>
                             <p class="back-text">
                                 QUAY LẠI
@@ -46,8 +46,7 @@
                                 </div>
                             </div>
                             <div class="combo-image">
-                                <img src="/admin/images/combo/${combo.image}" alt="Combo Image"
-                                    class="combo-image_style">
+                                <img src="/images/combo/${combo.image}" alt="Combo Image" class="combo-image_style">
                             </div>
                         </div>
                         <div class="collapse-item">
@@ -69,7 +68,7 @@
                                                         <div class="combo-card">
                                                             <div class="product-item_header">
                                                                 <div class="product-img">
-                                                                    <img src="/admin/images/product/${product.image}"
+                                                                    <img src="/images/product/${product.image}"
                                                                         alt="Combo Image" class="card-img-top">
                                                                 </div>
                                                                 <div class="product-name">
@@ -120,7 +119,7 @@
                                                         <div class="combo-card">
                                                             <div class="product-item_header">
                                                                 <div class="product-img">
-                                                                    <img src="/admin/images/product/${product.image}"
+                                                                    <img src="/images/product/${product.image}"
                                                                         alt="Combo Image" class="card-img-top">
                                                                 </div>
                                                                 <div class="product-name">
@@ -171,7 +170,7 @@
                                                         <div class="combo-card">
                                                             <div class="product-item_header">
                                                                 <div class="product-img">
-                                                                    <img src="/admin/images/product/${product.image}"
+                                                                    <img src="/images/product/${product.image}"
                                                                         alt="Combo Image" class="card-img-top">
                                                                 </div>
                                                                 <div class="product-name">

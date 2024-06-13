@@ -24,7 +24,7 @@
                         const avatarFile = $("#avatarFile");
                         const orgImage = "${newUser.avatar}"
                         if (orgImage) {
-                            const urlImage = "/admin/images/avatar/" + orgImage;
+                            const urlImage = "/images/avatar/" + orgImage;
                             $("#avatarPreview").attr("src", urlImage);
                             $("#avatarPreview").css({ "display": "block" });
                             debugger

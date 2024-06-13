@@ -41,8 +41,7 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-4">
-                                    <img src="/admin/images/avatar/${user.avatar}" class="img-fluid"
-                                        alt="Product Image">
+                                    <img src="/images/avatar/${user.avatar}" class="img-fluid" alt="Product Image">
                                 </div>
                                 <div class="col-md-8">
                                     <h4>Full name: <span>${user.fullName}</span></h4>

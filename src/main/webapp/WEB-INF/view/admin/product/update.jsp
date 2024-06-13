@@ -24,7 +24,7 @@
                         const imageFile = $("#imageFile");
                         const orgImage = "${newProduct.image}"
                         if (orgImage) {
-                            const urlImage = "/admin/images/product/" + orgImage;
+                            const urlImage = "/images/product/" + orgImage;
                             $("#imagePreview").attr("src", urlImage);
                             $("#imagePreview").css({ "display": "block" });
                             debugger

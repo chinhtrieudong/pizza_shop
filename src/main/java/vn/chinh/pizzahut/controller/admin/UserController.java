@@ -78,31 +78,25 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/update")
-    public String handleUpdateUser(@ModelAttribute("newUser") @Valid User user, BindingResult newUseBindingResult,
+    public String handleUpdateUser(@ModelAttribute("newUser") User user,
             @RequestParam("file") MultipartFile file) {
-        List<FieldError> errors = newUseBindingResult.getFieldErrors();
-
-        for (FieldError error : errors) {
-            System.out.println(">>>" + error.getField() + " - " + error.getDefaultMessage());
-        }
-        if (newUseBindingResult.hasErrors()) {
-            return "admin/user/update";
-        }
 
         User curUser = this.userService.fetchUserById(user.getId());
-        String fileName = this.uploadService.handleUploadFile(file, "avatar");
+        if (curUser != null) {
+            if (!file.isEmpty()) {
+                curUser.setAvatar(this.uploadService.handleUploadFile(file, "avatar"));
+            }
 
-        curUser.setEmail(user.getEmail());
-        curUser.setAddress(user.getAddress());
-        curUser.setFullName(user.getFullName());
-        curUser.setRole(user.getRole());
-        curUser.setPhone(user.getPhone());
-        curUser.setAvatar(fileName);
+            curUser.setEmail(user.getEmail());
+            curUser.setFullName(user.getFullName());
+            curUser.setAddress(user.getAddress());
+            curUser.setPhone(user.getPhone());
+            curUser.setRole(this.userService.fetchRoleByName(user.getRole().getName()));
 
-        this.userService.handleSaveUser(curUser);
+            this.userService.handleSaveUser(curUser);
+        }
 
         return "redirect:/admin/user";
-
     }
 
     @GetMapping("/admin/user/{id}")

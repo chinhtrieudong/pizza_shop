@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <nav class="header-container navbar navbar-expand-lg navbar-light navbar-custom">
-        <a href="/menu"> <img class="header-logo" src="/admin/images/product/logo2.png" alt="Logo"></a>
+        <a href="/"> <img class="header-logo" src="/client/images/logo2.png" alt="Logo"></a>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">

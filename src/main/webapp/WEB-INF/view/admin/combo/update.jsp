@@ -24,7 +24,7 @@
                         const imageFile = $("#imageFile");
                         const orgImage = "${newCombo.image}"
                         if (orgImage) {
-                            const urlImage = "/admin/images/combo/" + orgImage;
+                            const urlImage = "/images/combo/" + orgImage;
                             $("#imagePreview").attr("src", urlImage);
                             $("#imagePreview").css({ "display": "block" });
                             debugger
