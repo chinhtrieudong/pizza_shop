@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    <div class="col-lg-3 cart-container">
+    <div class="d-none d-lg-block col-lg-3 cart-container">
         <div class="cart">
             <div class="cart-header">
                 <h2 class="text-center cart-header_title">Giỏ Hàng</h2>
@@ -32,7 +32,7 @@
                     <div class="carousel-inner shadow-sm">
                         <div class="carousel-item  active">
                             <div class="favorite-item text-center">
-                                <img src="/client/images/pizzas/delight1.jpg" class="favorite-img" alt="">
+                                <img src="/images/Xa_Lach_Ca_Ngu.jpg" class="favorite-img" alt="">
                                 <div class="favorite-item_info">
                                     <span class="favorite-item_name">Món Yêu Thích</span>
                                     <span class="favorite-item_price">89,000đ</span>
@@ -42,7 +42,7 @@
                         </div>
                         <div class="carousel-item ">
                             <div class="favorite-item text-center">
-                                <img src="/client/images/pizzas/delight1.jpg" class="favorite-img" alt="">
+                                <img src="/images/Canh_Ga_Nuong_BBQ.jpg" class="favorite-img" alt="">
                                 <div class="favorite-item_info">
                                     <span class="favorite-item_name">Món Yêu Thích</span>
                                     <span class="favorite-item_price">89,000đ</span>

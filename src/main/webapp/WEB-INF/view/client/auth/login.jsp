@@ -25,8 +25,13 @@
                                 <p class="login-title">🍕🍕 WELCOME BACK!</p>
                                 <form class="login-form " method="post" action="/login" modelAttribute="user">
                                     <c:if test="${param.error != null}">
-                                        <div class="col-12 my-2 text-center" style="color: red;">Invalid email or
-                                            password!
+                                        <div class="col-12 my-2 text-center" style="color: red;">
+                                            Invalid email or password.
+                                        </div>
+                                    </c:if>
+                                    <c:if test="${param.logout != null}">
+                                        <div class="col-12 my-2 text-center" style="color: green;">
+                                            Log out success.
                                         </div>
                                     </c:if>
                                     <div class="form-group col-12">
@@ -38,19 +43,30 @@
                                         <input name="password" type="password" class="form-control " />
                                     </div>
 
+                                    <!-- <div class="form-group col-12">
+                                        <td><input type="checkbox" name="remember-me" /></td>
+                                        <td>Remember Me:</td>
+                                    </div> -->
+
                                     <div>
                                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                     </div>
 
-                                    <div class="w-100 d-flex justify-content-center">
+                                    <div class="btn-login w-100 d-flex justify-content-center">
                                         <button type="submit" class="btn register-btn">Login</button>
                                     </div>
+                                    <p class="redirect-to-register py-2 d-flex justify-content-center">
+                                        Do not have an account?
+                                        <a href="/register" class="px-1">
+                                            Register now
+                                        </a>
+                                    </p>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+                <script src=" https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
                 <script src="/client/js/script.js"></script>
             </body>

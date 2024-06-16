@@ -83,10 +83,15 @@
                                         ${confirmPasswordError}
                                     </div>
                                 </div>
-                                <div class="w-100 d-flex justify-content-center">
+                                <div class="btn-register w-100 d-flex justify-content-center">
                                     <button type="submit" class="btn register-btn">Submit</button>
                                 </div>
-
+                                <p class="redirect-to-login py-2 d-flex justify-content-center">
+                                    Do you already have an account?
+                                    <a href="/login" class="px-1">
+                                        Login now
+                                    </a>
+                                </p>
                             </form:form>
                         </div>
                     </div>

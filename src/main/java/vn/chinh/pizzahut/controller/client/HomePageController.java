@@ -23,7 +23,6 @@ import vn.chinh.pizzahut.service.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomePageController {
@@ -92,8 +91,14 @@ public class HomePageController {
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-        model.addAttribute("user", new User());
+
         return "client/auth/login";
+    }
+
+    @GetMapping("/access-deny")
+    public String getAccessDenyPage(Model model) {
+
+        return "client/auth/deny";
     }
 
 }

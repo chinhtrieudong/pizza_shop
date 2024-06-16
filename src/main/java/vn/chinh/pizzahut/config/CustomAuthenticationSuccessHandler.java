@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -15,8 +16,13 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import vn.chinh.pizzahut.domain.User;
+import vn.chinh.pizzahut.service.UserService;
 
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
+
+    @Autowired
+    private UserService userService;
 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
@@ -37,11 +43,16 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         throw new IllegalStateException();
     }
 
-    protected void clearAuthenticationAttributes(HttpServletRequest request) {
+    protected void clearAuthenticationAttributes(HttpServletRequest request, Authentication authentication) {
         HttpSession session = request.getSession(false);
         if (session == null) {
             return;
         }
+        String email = authentication.getName();
+        User user = userService.fetchUserByEmail(email);
+
+        session.setAttribute("fullName", user.getFullName());
+        session.setAttribute("avatar", user.getAvatar());
         session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
     }
 
@@ -60,6 +71,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         redirectStrategy.sendRedirect(request, response, targetUrl);
 
         // clear
-        clearAuthenticationAttributes(request);
+        clearAuthenticationAttributes(request, authentication);
     }
 }

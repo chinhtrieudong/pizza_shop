@@ -18,10 +18,11 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="main-container col-lg-9">
-                            <jsp:include page="../layout/header.jsp" />
-                            <jsp:include page="../layout/navbar.jsp" />
+                            <header class="header-menu">
+                                <jsp:include page="../layout/header.jsp" />
+                                <jsp:include page="../layout/navbar.jsp" />
+                            </header>
                             <div class="row">
-
                                 <c:forEach var="combo" items="${combos}">
                                     <div class="col-md-6 product-item">
                                         <div class="combo-card">
