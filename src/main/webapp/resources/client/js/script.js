@@ -58,6 +58,17 @@ $(document).ready(function () {
             }
         });
     }
+
+    // nav
+    var path = window.location.pathname;
+
+    $('.navbar-nav a').each(function () {
+        var href = $(this).attr('href');
+        if (href === path) {
+            $(this).addClass('active');
+        }
+    });
+
 });
 
 

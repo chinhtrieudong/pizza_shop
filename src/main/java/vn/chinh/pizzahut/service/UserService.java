@@ -60,4 +60,8 @@ public class UserService {
     public User fetchUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
     }
+
+    public void save(User user) {
+        this.userRepository.save(user);
+    }
 }

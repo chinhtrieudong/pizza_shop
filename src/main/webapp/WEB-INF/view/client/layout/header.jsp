@@ -19,13 +19,13 @@
                     <a class="header-user_text header-user nav-link" href="#">Thành viên</a> -->
 
                         <c:if test="${not empty pageContext.request.userPrincipal}">
-                            <div class="dropdown">
+                            <div class="dropdown ">
                                 <button class="btn btn-header_user" type="button" id="dropdownMenuButton"
                                     data-toggle="dropdown">
                                     <i class="header-user_icon fas fa-circle-user"></i>
                                     <span class="item-user_title">Hi ${sessionScope.fullName}</span>
                                 </button>
-                                <div class="dropdown-menu dropdown-user_items">
+                                <div class="dropdown-menu dropdown-user_items dropdown-menu-right">
                                     <a class="dropdown-item user-item_header" href="#">
                                         <img class="user-item_avatar" src="/images/avatar/${sessionScope.avatar}"
                                             alt="">

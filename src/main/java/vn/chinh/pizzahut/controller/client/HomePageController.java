@@ -91,14 +91,19 @@ public class HomePageController {
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
-
         return "client/auth/login";
     }
 
     @GetMapping("/access-deny")
     public String getAccessDenyPage(Model model) {
-
         return "client/auth/deny";
+    }
+
+    @GetMapping("/PIZZA")
+    public String getPizzaPage(Model model) {
+        List<Product> pizzas = this.productService.fetchProductByCategory(ProductCategory.PIZZA);
+        model.addAttribute("pizzas", pizzas);
+        return "client/pizza/show";
     }
 
 }

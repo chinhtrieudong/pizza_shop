@@ -1,5 +1,7 @@
 package vn.chinh.pizzahut.domain;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cart_detail")
-public class CartDetail {
+public class CartDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -22,6 +24,13 @@ public class CartDetail {
     @JoinColumn(name = "cart_id")
     private Cart cart;
 
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    public CartDetail() {
+    }
+
     public CartDetail(long id, double price, int quantity, Cart cart) {
         this.id = id;
         this.price = price;
@@ -31,6 +40,14 @@ public class CartDetail {
 
     public long getId() {
         return id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public void setId(long id) {
@@ -45,7 +62,7 @@ public class CartDetail {
         this.price = price;
     }
 
-    public long getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 

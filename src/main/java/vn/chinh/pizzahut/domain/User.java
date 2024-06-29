@@ -1,11 +1,14 @@
 package vn.chinh.pizzahut.domain;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -15,7 +18,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -40,6 +43,9 @@ public class User {
     @JoinColumn(name = "role_id")
     @Valid
     private Role role;
+
+    @OneToOne(mappedBy = "user")
+    private Cart cart;
 
     public User(long id, String email, String password, String fullName, String address, String phone, String avatar,
             Role role) {
@@ -119,6 +125,14 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 
 }

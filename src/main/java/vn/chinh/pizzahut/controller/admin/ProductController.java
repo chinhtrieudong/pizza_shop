@@ -1,6 +1,7 @@
 package vn.chinh.pizzahut.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,15 +73,15 @@ public class ProductController {
 
     @GetMapping("/admin/product/{id}")
     public String getProductDetailPage(@PathVariable long id, Model model) {
-        Product product = this.productService.fetchProductById(id);
-        model.addAttribute("product", product);
+        Optional<Product> productOptional = this.productService.fetchProductById(id);
+        model.addAttribute("product", productOptional.get());
         return "admin/product/detail";
     }
 
     @GetMapping("/admin/product/update/{id}")
     public String getProductUpdatePage(@PathVariable long id, Model model) {
-        Product product = this.productService.fetchProductById(id);
-        model.addAttribute("newProduct", product);
+        Optional<Product> productOptional = this.productService.fetchProductById(id);
+        model.addAttribute("newProduct", productOptional.get());
         return "admin/product/update";
     }
 
@@ -88,7 +89,8 @@ public class ProductController {
     public String handleUpdateProduct(@ModelAttribute("newProduct") Product product,
             @RequestParam("file") MultipartFile file) {
 
-        Product curProduct = this.productService.fetchProductById(product.getId());
+        Optional<Product> productOptional = this.productService.fetchProductById(product.getId());
+        Product curProduct = productOptional.get();
         if (curProduct != null) {
 
             if (!file.isEmpty()) {
@@ -116,8 +118,8 @@ public class ProductController {
 
     @GetMapping("/admin/product/delete/{id}")
     public String getProductDeletePage(@PathVariable long id, Model model) {
-        Product product = this.productService.fetchProductById(id);
-        model.addAttribute("product", product);
+        Optional<Product> productOptional = this.productService.fetchProductById(id);
+        model.addAttribute("product", productOptional.get());
         return "admin/product/delete";
     }
 

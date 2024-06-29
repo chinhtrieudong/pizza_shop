@@ -142,8 +142,10 @@
 }
 
 .product-item .card-body {
-    height: 405.5px;
+    display: flex;
+    /* height: 405.5px; */
     padding: 6px 12px 12px;
+    justify-content: start;
 }
 
 .card-body .product-item {
@@ -160,9 +162,7 @@
     padding: 5px;
 }
 
-.card-title {
-    height: 60px;
-}
+/* .card-title {} */
 
 .card-body_text {
     padding: 5px !important;
@@ -208,4 +208,8 @@
     line-height: 1.5;
     color: var(--white);
     text-transform: uppercase;
+}
+
+.product-item .combo-card {
+    box-shadow: var(--shadow-color_product);
 }

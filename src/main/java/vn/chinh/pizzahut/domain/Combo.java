@@ -1,5 +1,6 @@
 package vn.chinh.pizzahut.domain;
 
+import java.io.Serializable;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -11,7 +12,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Combos")
-public class Combo {
+public class Combo implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
