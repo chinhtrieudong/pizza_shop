@@ -1,9 +1,11 @@
 package vn.chinh.pizzahut.service;
 
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 import vn.chinh.pizzahut.domain.Cart;
+
 import vn.chinh.pizzahut.repository.CartRepository;
 
 @Service
@@ -18,7 +20,11 @@ public class CartService {
         this.cartRepository.save(cart);
     }
 
-    public Optional<Cart> getCartById(long id) {
+    public Optional<Cart> fetchById(long id) {
         return this.cartRepository.findById(id);
+    }
+
+    public void deleteById(long id) {
+        this.cartRepository.deleteById(id);
     }
 }

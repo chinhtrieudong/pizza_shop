@@ -4,7 +4,8 @@ public enum ProductCategory {
     PIZZA("Pizza"),
     APPETIZER("appetizer"),
     DRINK("Drink"),
-    CHICKEN("Chicken");
+    CHICKEN("Chicken"),
+    MY_BOX("myBox");
 
     private String value;
 

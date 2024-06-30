@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import vn.chinh.pizzahut.domain.Cart;
 import vn.chinh.pizzahut.domain.Combo;
 import vn.chinh.pizzahut.domain.Product;
 import vn.chinh.pizzahut.domain.User;
@@ -41,6 +42,7 @@ public class HomePageController {
 
     @GetMapping("/")
     public String getMenuPage(Model model) {
+        model.addAttribute("cart", new Cart());
         List<Combo> combos = this.comboService.fetchAllCombos();
         model.addAttribute("combos", combos);
         return "client/combo/show";
@@ -97,13 +99,6 @@ public class HomePageController {
     @GetMapping("/access-deny")
     public String getAccessDenyPage(Model model) {
         return "client/auth/deny";
-    }
-
-    @GetMapping("/PIZZA")
-    public String getPizzaPage(Model model) {
-        List<Product> pizzas = this.productService.fetchProductByCategory(ProductCategory.PIZZA);
-        model.addAttribute("pizzas", pizzas);
-        return "client/pizza/show";
     }
 
 }

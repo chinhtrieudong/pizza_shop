@@ -13,9 +13,9 @@
             <a class="nav-item nav-link" href="/MY_BOX">
                 <p class="nav-text">MY BOX</p>
             </a>
-            <a class="nav-item nav-link" href="/COMBO">
+            <!-- <a class="nav-item nav-link" href="/COMBO">
                 <p class="nav-text">COMBO</p>
-            </a>
+            </a> -->
             <a class="nav-item nav-link" href="/STARTER">
                 <p class="nav-text">MÓN KHAI VỊ</p>
             </a>

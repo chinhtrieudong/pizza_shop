@@ -21,13 +21,15 @@ public class ProductService {
     private final CartRepository cartRepository;
     private final CartDetailRepository cartDetailRepository;
     private final UserService userService;
+    private final CartService cartService;
 
     ProductService(ProductRepository productRepository, CartRepository cartRepository,
-            CartDetailRepository cartDetailRepository, UserService userService) {
+            CartDetailRepository cartDetailRepository, UserService userService, CartService cartService) {
         this.productRepository = productRepository;
         this.cartRepository = cartRepository;
         this.cartDetailRepository = cartDetailRepository;
         this.userService = userService;
+        this.cartService = cartService;
     }
 
     public void saveProduct(Product product) {
@@ -63,7 +65,7 @@ public class ProductService {
         if (curCart == null) {
             Cart newCart = new Cart();
             newCart.setUser(curUser);
-            newCart.setSum(1);
+            newCart.setSum(0);
 
             curCart = this.cartRepository.save(newCart);
         }
@@ -107,7 +109,43 @@ public class ProductService {
         }
     }
 
-    public List<CartDetail> fetchCartDetailsByCart(Cart cart) {
-        return this.cartDetailRepository.findByCart(cart);
+    public void handleRemoveCartDetail(long cartDetailId, HttpSession session) {
+        Optional<CartDetail> cartDetailOptional = this.cartDetailRepository.findById(cartDetailId);
+        if (cartDetailOptional.isPresent()) {
+
+            CartDetail curCartDetail = cartDetailOptional.get();
+
+            // Xóa chi tiết giỏ hàng
+            this.cartDetailRepository.deleteById(curCartDetail.getId());
+
+            Optional<Cart> cartOptional = this.cartRepository.findById(curCartDetail.getCart().getId());
+            Cart curCart = cartOptional.get();
+            List<CartDetail> cartDetails = this.cartDetailRepository.findByCart(curCart);
+            curCart.setCartDetails(cartDetails);
+
+            // Cập nhật giỏ hàng hiện tại (sum)
+            int newSum = curCart.getSum() - 1;
+            curCart.setSum(newSum);
+
+            // Xóa giỏ hàng nếu không còn chi tiết nào
+            if (newSum > 0) {
+                this.cartService.handleSaveCart(curCart);
+                session.setAttribute("sum", newSum);
+            } else {
+                this.cartService.deleteById(curCart.getId());
+                session.setAttribute("sum", 0);
+            }
+
+            // Lấy danh sách chi tiết giỏ hàng mới
+            // List<CartDetail> cartDetails = this.cartDetailRepository.findByCart(curCart);
+            session.setAttribute("cartDetails", cartDetails);
+
+            // Tính tổng giá
+            double totalPrice = cartDetails.stream()
+                    .mapToDouble(cd -> cd.getQuantity() * cd.getPrice())
+                    .sum();
+            session.setAttribute("totalPrice", totalPrice);
+        }
     }
+
 }

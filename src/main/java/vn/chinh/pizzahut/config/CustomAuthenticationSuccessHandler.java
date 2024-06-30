@@ -1,6 +1,7 @@
 package vn.chinh.pizzahut.config;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -20,8 +21,8 @@ import jakarta.servlet.http.HttpSession;
 import vn.chinh.pizzahut.domain.Cart;
 import vn.chinh.pizzahut.domain.CartDetail;
 import vn.chinh.pizzahut.domain.User;
+import vn.chinh.pizzahut.service.CartDetailService;
 import vn.chinh.pizzahut.service.CartService;
-import vn.chinh.pizzahut.service.ProductService;
 import vn.chinh.pizzahut.service.UserService;
 
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
@@ -33,7 +34,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private CartService cartService;
 
     @Autowired
-    private ProductService productService;
+    private CartDetailService cartDetailService;
 
     protected String determineTargetUrl(final Authentication authentication) {
 
@@ -68,6 +69,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             session.setAttribute("avatar", user.getAvatar());
             session.setAttribute("id", user.getId());
             session.setAttribute("email", user.getEmail());
+            session.setAttribute("phone", user.getPhone());
 
             Cart cart = user.getCart();
             if (cart == null) {
@@ -78,8 +80,8 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
                 userService.save(user);
             }
 
-            Optional<Cart> cartOptional = cartService.getCartById(cart.getId());
-            List<CartDetail> cartDetails = this.productService.fetchCartDetailsByCart(cartOptional.get());
+            Optional<Cart> cartOptional = cartService.fetchById(cart.getId());
+            List<CartDetail> cartDetails = this.cartDetailService.fetchCartDetailsByCart(cartOptional.get());
             session.setAttribute("cartDetails", cartDetails);
 
             double totalPrice = 0;
