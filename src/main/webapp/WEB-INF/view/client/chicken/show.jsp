@@ -24,7 +24,7 @@
                                 <jsp:include page="../layout/navbar.jsp" />
                             </header>
                             <div class="row">
-                                <c:forEach var="product" items="${pizzas}">
+                                <c:forEach var="product" items="${chickens}">
                                     <div class="col col-md-3 product-item">
                                         <div class="combo-card">
                                             <div class="product-item_header">

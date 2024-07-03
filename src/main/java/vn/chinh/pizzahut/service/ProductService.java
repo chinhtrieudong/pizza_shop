@@ -10,26 +10,24 @@ import vn.chinh.pizzahut.domain.CartDetail;
 import vn.chinh.pizzahut.domain.Combo;
 import vn.chinh.pizzahut.domain.Product;
 import vn.chinh.pizzahut.domain.User;
+import vn.chinh.pizzahut.domain.dto.OrderDTO;
 import vn.chinh.pizzahut.domain.enums.ProductCategory;
-import vn.chinh.pizzahut.repository.CartDetailRepository;
-import vn.chinh.pizzahut.repository.CartRepository;
 import vn.chinh.pizzahut.repository.ProductRepository;
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
-    private final CartRepository cartRepository;
-    private final CartDetailRepository cartDetailRepository;
+
     private final UserService userService;
     private final CartService cartService;
+    private final CartDetailService cartDetailService;
 
-    ProductService(ProductRepository productRepository, CartRepository cartRepository,
-            CartDetailRepository cartDetailRepository, UserService userService, CartService cartService) {
+    ProductService(ProductRepository productRepository, UserService userService, CartService cartService,
+            CartDetailService cartDetailService) {
         this.productRepository = productRepository;
-        this.cartRepository = cartRepository;
-        this.cartDetailRepository = cartDetailRepository;
         this.userService = userService;
         this.cartService = cartService;
+        this.cartDetailService = cartDetailService;
     }
 
     public void saveProduct(Product product) {
@@ -67,7 +65,7 @@ public class ProductService {
             newCart.setUser(curUser);
             newCart.setSum(0);
 
-            curCart = this.cartRepository.save(newCart);
+            curCart = this.cartService.handleSaveCart(newCart);
         }
 
         // lưu cart_detail
@@ -76,7 +74,7 @@ public class ProductService {
 
         if (productOptional.isPresent()) {
             Product curProduct = productOptional.get();
-            CartDetail curCartDetail = this.cartDetailRepository.findByCartAndProduct(curCart, curProduct);
+            CartDetail curCartDetail = this.cartDetailService.findByCartAndProduct(curCart, curProduct);
 
             if (curCartDetail == null) {
                 CartDetail newCartDetail = new CartDetail();
@@ -85,20 +83,20 @@ public class ProductService {
                 newCartDetail.setPrice(curProduct.getPrice());
                 newCartDetail.setQuantity(1);
 
-                this.cartDetailRepository.save(newCartDetail);
+                this.cartDetailService.handleSaveCartDetail(newCartDetail);
 
                 // update cart (sum)
                 int sum = curCart.getSum() + 1;
                 curCart.setSum(sum);
-                curCart = this.cartRepository.save(curCart);
+                curCart = this.cartService.handleSaveCart(curCart);
                 session.setAttribute("sum", sum);
                 // session.setAttribute("cart", curCart);
             } else {
                 curCartDetail.setQuantity(curCartDetail.getQuantity() + 1);
-                this.cartDetailRepository.save(curCartDetail);
+                this.cartDetailService.handleSaveCartDetail(curCartDetail);
             }
 
-            List<CartDetail> cartDetails = this.cartDetailRepository.findByCart(curCart);
+            List<CartDetail> cartDetails = this.cartDetailService.fetchByCart(curCart);
             session.setAttribute("cartDetails", cartDetails);
 
             double totalPrice = 0;
@@ -110,24 +108,23 @@ public class ProductService {
     }
 
     public void handleRemoveCartDetail(long cartDetailId, HttpSession session) {
-        Optional<CartDetail> cartDetailOptional = this.cartDetailRepository.findById(cartDetailId);
+        Optional<CartDetail> cartDetailOptional = this.cartDetailService.fetchById(cartDetailId);
         if (cartDetailOptional.isPresent()) {
 
             CartDetail curCartDetail = cartDetailOptional.get();
 
             // Xóa chi tiết giỏ hàng
-            this.cartDetailRepository.deleteById(curCartDetail.getId());
+            this.cartDetailService.deleteById(curCartDetail.getId());
 
-            Optional<Cart> cartOptional = this.cartRepository.findById(curCartDetail.getCart().getId());
+            Optional<Cart> cartOptional = this.cartService.fetchById(curCartDetail.getCart().getId());
             Cart curCart = cartOptional.get();
-            List<CartDetail> cartDetails = this.cartDetailRepository.findByCart(curCart);
+            List<CartDetail> cartDetails = this.cartDetailService.fetchByCart(curCart);
             curCart.setCartDetails(cartDetails);
 
             // Cập nhật giỏ hàng hiện tại (sum)
             int newSum = curCart.getSum() - 1;
             curCart.setSum(newSum);
 
-            // Xóa giỏ hàng nếu không còn chi tiết nào
             if (newSum > 0) {
                 this.cartService.handleSaveCart(curCart);
                 session.setAttribute("sum", newSum);
@@ -136,16 +133,15 @@ public class ProductService {
                 session.setAttribute("sum", 0);
             }
 
-            // Lấy danh sách chi tiết giỏ hàng mới
-            // List<CartDetail> cartDetails = this.cartDetailRepository.findByCart(curCart);
             session.setAttribute("cartDetails", cartDetails);
-
-            // Tính tổng giá
-            double totalPrice = cartDetails.stream()
-                    .mapToDouble(cd -> cd.getQuantity() * cd.getPrice())
-                    .sum();
-            session.setAttribute("totalPrice", totalPrice);
+            session.setAttribute("totalPrice", calculateTotalPrice(cartDetails));
         }
+    }
+
+    private double calculateTotalPrice(List<CartDetail> cartDetails) {
+        return cartDetails.stream()
+                .mapToDouble(cd -> cd.getQuantity() * cd.getPrice())
+                .sum();
     }
 
 }

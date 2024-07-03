@@ -7,4 +7,6 @@ import vn.chinh.pizzahut.domain.User;
 
 public interface CartRepository extends JpaRepository<Cart, Long> {
     Cart findByUser(User user);
+
+    Cart save(Cart cart);
 }

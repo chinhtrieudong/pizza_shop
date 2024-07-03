@@ -5,24 +5,30 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import vn.chinh.pizzahut.domain.Cart;
+
 import vn.chinh.pizzahut.domain.Product;
+import vn.chinh.pizzahut.domain.User;
+import vn.chinh.pizzahut.domain.dto.OrderDTO;
 import vn.chinh.pizzahut.domain.enums.ProductCategory;
+import vn.chinh.pizzahut.service.OrderService;
 import vn.chinh.pizzahut.service.ProductService;
+import vn.chinh.pizzahut.service.UserService;
 
 @Controller
 public class ItemController {
     private final ProductService productService;
+    private final OrderService orderService;
+    private final UserService userService;
 
-    public ItemController(ProductService productService) {
+    public ItemController(ProductService productService, OrderService orderService, UserService userService) {
         this.productService = productService;
-
+        this.orderService = orderService;
+        this.userService = userService;
     }
 
     @PostMapping("/add-product-to-cart/{id}")
@@ -84,4 +90,14 @@ public class ItemController {
         model.addAttribute("totalPrice", totalPrice);
         return "client/checkout/show";
     }
+
+    @PostMapping("/place-order")
+    public String handlePlaceOrder(OrderDTO orderDTO, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        long userId = (long) session.getAttribute("userId");
+        User curUser = this.userService.fetchUserById(userId);
+        this.orderService.handlePlaceOrder(curUser, orderDTO, session);
+        return "redirect:/";
+    }
+
 }

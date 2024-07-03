@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import vn.chinh.pizzahut.domain.Cart;
 import vn.chinh.pizzahut.domain.CartDetail;
+import vn.chinh.pizzahut.domain.Product;
 import vn.chinh.pizzahut.repository.CartDetailRepository;
 
 @Service
@@ -21,11 +22,23 @@ public class CartDetailService {
         return this.cartDetailRepository.findById(id);
     }
 
-    public List<CartDetail> fetchCartDetailsByCart(Cart cart) {
+    public void deleteById(long id) {
+        this.cartDetailRepository.deleteById(id);
+    }
+
+    public CartDetail findByCartAndProduct(Cart cart, Product product) {
+        return this.cartDetailRepository.findByCartAndProduct(cart, product);
+    }
+
+    public CartDetail handleSaveCartDetail(CartDetail cartDetail) {
+        return this.cartDetailRepository.save(cartDetail);
+    }
+
+    public List<CartDetail> fetchByCart(Cart cart) {
         return this.cartDetailRepository.findByCart(cart);
     }
 
-    public void deleteById(long id) {
-        this.cartDetailRepository.deleteById(id);
+    public Optional<CartDetail> fetchById(long id) {
+        return this.cartDetailRepository.findById(id);
     }
 }

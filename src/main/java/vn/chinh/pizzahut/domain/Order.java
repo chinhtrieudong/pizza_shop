@@ -1,12 +1,15 @@
 package vn.chinh.pizzahut.domain;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import vn.chinh.pizzahut.domain.enums.OrderStatus;
 
 @Entity
 @Table(name = "orders")
@@ -20,10 +23,27 @@ public class Order {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public Order(long id, User user, double totalPrice) {
+    private String receiverAddress;
+    private String receiverName;
+    private String receiverPhone;
+    private String receiverEmail;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
+    public Order() {
+    }
+
+    public Order(long id, double totalPrice, User user, String receiverAddress, String receiverName,
+            String receiverPhone, String receiverEmail, OrderStatus status) {
         this.id = id;
-        this.user = user;
         this.totalPrice = totalPrice;
+        this.user = user;
+        this.receiverAddress = receiverAddress;
+        this.receiverName = receiverName;
+        this.receiverPhone = receiverPhone;
+        this.receiverEmail = receiverEmail;
+        this.status = status;
     }
 
     public long getId() {
@@ -48,6 +68,46 @@ public class Order {
 
     public void setTotalPrice(double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public String getReceiverAddress() {
+        return receiverAddress;
+    }
+
+    public void setReceiverAddress(String receiverAddress) {
+        this.receiverAddress = receiverAddress;
+    }
+
+    public String getReceiverName() {
+        return receiverName;
+    }
+
+    public void setReceiverName(String receiverName) {
+        this.receiverName = receiverName;
+    }
+
+    public String getReceiverPhone() {
+        return receiverPhone;
+    }
+
+    public void setReceiverPhone(String receiverPhone) {
+        this.receiverPhone = receiverPhone;
+    }
+
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
+    public String getReceiverEmail() {
+        return receiverEmail;
+    }
+
+    public void setReceiverEmail(String receiverEmail) {
+        this.receiverEmail = receiverEmail;
     }
 
 }

@@ -93,8 +93,10 @@
                             <div class="text-center footer-btn_checkout">
                                 <form:form action="/confirm-checkout" method="post" modelAttribute="cart">
                                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                                    <button class="btn btn-primary btn-checkout">
-                                        THANH TOÁN <span class="value">
+                                    <button class="btn btn-primary btn-checkout" <c:if
+                                        test="${sessionScope.totalPrice == 0}">disabled</c:if>>
+                                        THANH TOÁN
+                                        <span class="value">
                                             <fmt:formatNumber type="number" value="${sessionScope.totalPrice}" /> ₫
                                         </span>
                                     </button>

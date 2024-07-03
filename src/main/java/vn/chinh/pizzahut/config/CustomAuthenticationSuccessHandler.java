@@ -67,7 +67,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         if (user != null) {
             session.setAttribute("fullName", user.getFullName());
             session.setAttribute("avatar", user.getAvatar());
-            session.setAttribute("id", user.getId());
+            session.setAttribute("userId", user.getId());
             session.setAttribute("email", user.getEmail());
             session.setAttribute("phone", user.getPhone());
 
@@ -81,7 +81,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             }
 
             Optional<Cart> cartOptional = cartService.fetchById(cart.getId());
-            List<CartDetail> cartDetails = this.cartDetailService.fetchCartDetailsByCart(cartOptional.get());
+            List<CartDetail> cartDetails = this.cartDetailService.fetchByCart(cartOptional.get());
             session.setAttribute("cartDetails", cartDetails);
 
             double totalPrice = 0;

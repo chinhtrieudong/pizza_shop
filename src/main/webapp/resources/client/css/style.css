@@ -407,10 +407,18 @@ p {
     padding: 10px;
     background: var(--btn-bg);
     position: relative;
+    font-weight: bold;
 }
 
 .btn-checkout:hover {
+    color: #0A8020;
     background-color: var(--btn-bg);
+}
+
+
+.btn-checkout:disabled {
+    color: #737781;
+    background-color: var(--white);
 }
 
 .footer-btn_checkout .btn-checkout .value {
