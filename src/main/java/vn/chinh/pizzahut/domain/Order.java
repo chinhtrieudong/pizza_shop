@@ -1,5 +1,8 @@
 package vn.chinh.pizzahut.domain;
 
+import java.util.Date;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -8,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import vn.chinh.pizzahut.domain.enums.OrderStatus;
 
@@ -28,14 +32,19 @@ public class Order {
     private String receiverPhone;
     private String receiverEmail;
 
+    private Date orderDate;
+
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
+
+    @OneToMany(mappedBy = "order")
+    List<OrderDetail> orderDetails;
 
     public Order() {
     }
 
     public Order(long id, double totalPrice, User user, String receiverAddress, String receiverName,
-            String receiverPhone, String receiverEmail, OrderStatus status) {
+            String receiverPhone, String receiverEmail, OrderStatus status, Date orderDate) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.user = user;
@@ -44,6 +53,7 @@ public class Order {
         this.receiverPhone = receiverPhone;
         this.receiverEmail = receiverEmail;
         this.status = status;
+        this.orderDate = orderDate;
     }
 
     public long getId() {
@@ -110,4 +120,19 @@ public class Order {
         this.receiverEmail = receiverEmail;
     }
 
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
+
+    public List<OrderDetail> getOrderDetails() {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails) {
+        this.orderDetails = orderDetails;
+    }
 }

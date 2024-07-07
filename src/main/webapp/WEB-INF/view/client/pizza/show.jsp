@@ -45,7 +45,6 @@
                                                             thêm</span>
                                                     </p>
                                                 </div>
-
                                                 <form action="/add-product-to-cart/${product.id}" method="post"
                                                     class="card-footer">
                                                     <input type="hidden" name="${_csrf.parameterName}"
@@ -54,7 +53,6 @@
                                                             <fmt:formatNumber type="number" value="${product.price}" />
                                                             ₫
                                                         </span></button>
-
                                                 </form>
                                             </div>
                                         </div>

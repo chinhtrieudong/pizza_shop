@@ -18,6 +18,7 @@ import vn.chinh.pizzahut.domain.enums.ProductCategory;
 import vn.chinh.pizzahut.service.OrderService;
 import vn.chinh.pizzahut.service.ProductService;
 import vn.chinh.pizzahut.service.UserService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ItemController {
@@ -97,7 +98,12 @@ public class ItemController {
         long userId = (long) session.getAttribute("userId");
         User curUser = this.userService.fetchUserById(userId);
         this.orderService.handlePlaceOrder(curUser, orderDTO, session);
-        return "redirect:/";
+        return "redirect:/thanks";
+    }
+
+    @GetMapping("/thanks")
+    public String getThanksPage() {
+        return "client/checkout/thank-you";
     }
 
 }

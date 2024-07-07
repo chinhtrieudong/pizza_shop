@@ -1,8 +1,12 @@
 package vn.chinh.pizzahut.service;
 
+import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
@@ -19,9 +23,9 @@ import vn.chinh.pizzahut.repository.OrderRepository;
 @Service
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
     private final CartService cartService;
     private final CartDetailService cartDetailService;
-    private final OrderDetailRepository orderDetailRepository;
 
     OrderService(OrderRepository orderRepository, CartService cartService, CartDetailService cartDetailService,
             OrderDetailRepository orderDetailRepository) {
@@ -31,11 +35,44 @@ public class OrderService {
         this.orderDetailRepository = orderDetailRepository;
     }
 
+    public Page<Order> findAll(Pageable pageable) {
+        return this.orderRepository.findAll(pageable);
+    }
+
+    public List<Order> fetchAllOrders() {
+        return this.orderRepository.findAll();
+    }
+
+    public Order saveOrder(Order order) {
+        return this.orderRepository.save(order);
+    }
+
+    public Optional<Order> fetchById(long id) {
+        return this.orderRepository.findById(id);
+    }
+
+    public List<Order> fetchOrdersByUser(User user) {
+        return this.orderRepository.findByUser(user);
+    }
+
+    public void handleDeleteById(long id) {
+        Optional<Order> orderOptional = this.orderRepository.findById(id);
+        if (orderOptional.isPresent()) {
+            Order curOrder = orderOptional.get();
+            // xóa orderDetail
+            List<OrderDetail> orderDetails = this.orderDetailRepository.findByOrder(curOrder);
+            for (OrderDetail orderDetail : orderDetails) {
+                this.orderDetailRepository.deleteById(orderDetail.getId());
+            }
+            // xóa order
+            this.orderRepository.deleteById(id);
+        }
+    }
+
     public void handlePlaceOrder(User user, OrderDTO orderDTO, HttpSession session) {
         Cart curCart = this.cartService.fetchByUser(user);
         if (curCart != null) {
             List<CartDetail> cartDetails = this.cartDetailService.fetchByCart(curCart);
-
             if (cartDetails != null) {
                 Order order = new Order();
                 order.setUser(user);
@@ -45,6 +82,8 @@ public class OrderService {
                 order.setReceiverAddress(orderDTO.getReceiverAddress());
                 order.setReceiverEmail(orderDTO.getReceiverEmail());
                 order.setStatus(OrderStatus.PENDING);
+
+                order.setOrderDate(new Date());
                 Order curOrder = this.orderRepository.save(order);
 
                 // save into orderDetail
@@ -70,6 +109,5 @@ public class OrderService {
                 session.setAttribute("sum", 0);
             }
         }
-        // remove cart from session/ cartDetail/ cart
     }
 }

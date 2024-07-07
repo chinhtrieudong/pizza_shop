@@ -1,7 +1,11 @@
 package vn.chinh.pizzahut.controller.admin;
 
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +30,22 @@ public class ComboController {
     }
 
     @GetMapping("/admin/combo")
-    public String getComboPage(Model model) {
-        List<Combo> combos = this.comboService.fetchAllCombos();
+    public String getComboPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                page = Integer.parseInt(pageOptional.get());
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+
+        Pageable pageable = PageRequest.of(page - 1, 5);
+        Page<Combo> cbs = this.comboService.findAll(pageable);
+        List<Combo> combos = cbs.getContent();
         model.addAttribute("combos", combos);
+        model.addAttribute("curPage", page);
+        model.addAttribute("totalPages", cbs.getTotalPages());
         return "admin/combo/show";
     }
 

@@ -48,10 +48,10 @@
                                     <thead>
                                         <tr>
                                             <th scope="col">ID</th>
-                                            <th scope="col">name</th>
+                                            <th colspan="2" scope="col">name</th>
                                             <th scope="col">price</th>
                                             <th scope="col">quantity</th>
-                                            <th scope="col">category</th>
+                                            <th colspan="2" scope="col">category</th>
                                             <th scope="col">action</th>
                                         </tr>
                                     </thead>
@@ -59,13 +59,13 @@
                                         <c:forEach var="product" items="${products}">
                                             <tr>
                                                 <th scope="row">${product.id}</th>
-                                                <td>${product.name}</td>
+                                                <td colspan="2">${product.name}</td>
                                                 <td>
                                                     <fmt:formatNumber type="number" value="${product.price}" /> đ
                                                 </td>
                                                 <td>${product.quantity}</td>
-                                                <td>${product.category}</td>
-                                                <td>
+                                                <td colspan="2">${product.category}</td>
+                                                <td colspan="2">
                                                     <a href="/admin/product/${product.id}"
                                                         class="btn btn-success">View</a>
                                                     <a href="/admin/product/update/${product.id}"
@@ -77,11 +77,39 @@
                                         </c:forEach>
                                     </tbody>
                                 </table>
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="${ curPage eq 1 ? 'disabled page-item': 'page-item'}">
+                                            <a class="page-link"
+                                                href="http://localhost:8080/admin/product?page=${curPage - 1}"
+                                                aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                        </li>
+                                        <c:forEach begin="1" end="${totalPages}" varStatus="loop">
+                                            <li class="page-item">
+                                                <a class="${loop.index eq curPage ? 'active page-link': 'page-link'}"
+                                                    href="http://localhost:8080/admin/product?page=${loop.index}">
+                                                    ${loop.index}
+                                                </a>
+                                            </li>
+                                        </c:forEach>
+                                        <li class="${ curPage eq totalPages ? 'disabled page-item': 'page-item'}">
+                                            <a class="page-link"
+                                                href="http://localhost:8080/admin/product?page=${curPage + 1}"
+                                                aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
+
 
 
                 <div class="modal fade" id="signOutModal" tabindex="-1" role="dialog">
@@ -104,6 +132,8 @@
                     </div>
                 </div>
 
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+                    crossorigin="anonymous"></script>
                 <script src="/admin/js/main.js"></script>
             </body>
 

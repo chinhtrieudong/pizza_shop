@@ -5,7 +5,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin manager</title>
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
         integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"
@@ -39,12 +38,22 @@
                                 <div class="card-body bg-primary d-flex align-items-center justify-content-between">
                                     <i class="fas fa-users fa-2x"></i>
                                     <div class="inner-text text-right">
-                                        <h3><span class="badge badge-danger badge-pill">20</span> New </h3>
+                                        <h3><span class="badge badge-danger badge-pill">${countUsers}</span> Quantity
+                                        </h3>
                                         <h5>Users</h5>
                                     </div>
                                 </div>
-                                <div class="card-footer bg-dark">
-                                    <a href="#" class="btn btn-link text-danger">Learn more</a>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-4 col-lg-3 p-4">
+                            <div class="card text-white my-2 rounded">
+                                <div class="card-body bg-primary d-flex align-items-center justify-content-between">
+                                    <i class="fas fa-pizza-slice fa-2x"></i>
+                                    <div class="inner-text text-right">
+                                        <h3><span class="badge badge-info badge-pill">${countProducts}</span> Quantity
+                                        </h3>
+                                        <h5>Products</h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -53,26 +62,10 @@
                                 <div class="card-body bg-primary d-flex align-items-center justify-content-between">
                                     <i class="fas fa-utensils fa-2x"></i>
                                     <div class="inner-text text-right">
-                                        <h3><span class="badge badge-success badge-pill">5</span> New </h3>
+                                        <h3><span class="badge badge-success badge-pill">${countOrders}</span> Quantity
+                                        </h3>
                                         <h5>Orders</h5>
                                     </div>
-                                </div>
-                                <div class="card-footer bg-dark">
-                                    <a href="#" class="btn btn-link text-danger">Learn more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-4 col-lg-3 p-4">
-                            <div class="card text-white my-2 rounded">
-                                <div class="card-body bg-primary d-flex align-items-center justify-content-between">
-                                    <i class="fas fa-store fa-2x"></i>
-                                    <div class="inner-text text-right">
-                                        <h3><span class="badge badge-info badge-pill">12</span> New </h3>
-                                        <h5>Stock</h5>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-dark">
-                                    <a href="#" class="btn btn-link text-danger">Learn more</a>
                                 </div>
                             </div>
                         </div>
@@ -81,13 +74,12 @@
                                 <div class="card-body bg-primary d-flex align-items-center justify-content-between">
                                     <i class="fas fa-truck-moving fa-2x"></i>
                                     <div class="inner-text text-right">
-                                        <h3><span class="badge badge-warning badge-pill">8</span> New </h3>
+                                        <h3><span class="badge badge-warning badge-pill">${countDeliveries}</span>
+                                            Quantity </h3>
                                         <h5>Deliveries</h5>
                                     </div>
                                 </div>
-                                <div class="card-footer bg-dark">
-                                    <a href="#" class="btn btn-link text-danger">Learn more</a>
-                                </div>
+
                             </div>
                         </div>
                     </div>

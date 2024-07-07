@@ -8,7 +8,7 @@
 
                 <meta charset="utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-                <title>product manager</title>
+                <title>Admin manager</title>
 
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
                     integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
@@ -22,9 +22,9 @@
                 <script>
                     $(document).ready(() => {
                         const imageFile = $("#imageFile");
-                        const orgImage = "${newProduct.image}"
+                        const orgImage = "${newCombo.image}"
                         if (orgImage) {
-                            const urlImage = "/images/product/" + orgImage;
+                            const urlImage = "/images/combo/" + orgImage;
                             $("#imagePreview").attr("src", urlImage);
                             $("#imagePreview").css({ "display": "block" });
                             debugger
@@ -49,69 +49,51 @@
                         <!-- MAIN CARDS-->
                         <div class="main-container container col-12 col-md-10 bg-light">
                             <nav aria-label="breadcrumb">
-                                <h1 class="mt-4">Manage products</h1>
+                                <h1 class="mt-4">Manage combos</h1>
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                                    <li class="breadcrumb-item"><a href="/admin/product">Product</a></li>
-                                    <li class="breadcrumb-item active">Update product</li>
+                                    <li class="breadcrumb-item"><a href="/admin/combo">Combo</a></li>
+                                    <li class="breadcrumb-item active">Update combo</li>
                                 </ol>
                             </nav>
 
                             <div class="mt-5">
                                 <div class="d-flex">
-                                    <a class="btn btn-primary mr-2" href="/admin/product?page=1">Back</a>
-                                    <h3>Update product with id = ${newProduct.id}</h3>
+                                    <a class="btn btn-primary mr-2" href="/admin/combo">Back</a>
+                                    <h3>Update combo with id = ${newCombo.id}</h3>
                                 </div>
                                 <hr />
                                 <div class="w-100 mt-3">
-                                    <form:form method="POST" action="/admin/product/update"
-                                        enctype="multipart/form-data" modelAttribute="newProduct" class="row">
+                                    <form:form method="POST" action="/admin/combo/update" enctype="multipart/form-data"
+                                        modelAttribute="newCombo" class="row">
+
                                         <div class="col-12 col-md-6 form-group d-none">
-                                            <label class="form-label">Id:</label>
+                                            <label class="form-label">id:</label>
                                             <form:input path="id" type="text" class="form-control" />
                                         </div>
+
                                         <div class="col-12 col-md-6 form-group">
                                             <label class="form-label">Name:</label>
-                                            <form:input path="name" type="name" class="form-control" />
+                                            <form:input path="name" type="text" class="form-control" />
                                         </div>
                                         <div class="col-12 col-md-6 form-group">
-                                            <label class="form-label">Price:</label>
-                                            <form:input path="price" type="text" class="form-control" />
+                                            <label class="form-label">Short name:</label>
+                                            <form:input path="shortName" type="text" class="form-control" />
                                         </div>
                                         <div class="col-12 col-md-12 form-group">
                                             <label class="form-label">Detail description:</label>
                                             <form:textarea path="detailDesc" type="text" class="form-control" />
                                         </div>
-                                        <div class="col-12 col-md-6 form-group">
-                                            <label class="form-label">Quantity:</label>
-                                            <form:input path="quantity" type="text" class="form-control" />
-                                        </div>
 
                                         <div class="col-12 col-md-6 form-group">
-                                            <label for="imageFile" class="form-label">Product image:</label>
-                                            <input name="file" class="form-control" type="file" id="imageFile">
+                                            <label for="imageFile" class="form-label">combo image:</label>
+                                            <input name="file" class="form-control" type="file" id="imageFile"
+                                                accept=".png, .jpg, .jpeg">
                                         </div>
 
-                                        <div class="col-12 col-md-3 d-flex align-items-start">
-                                            <label class="form-label m-0 mr-2 ">Category:
-                                            </label>
-                                            <form:select class="form-select" path="category">
-                                                <form:option value="PIZZA">PIZZA</form:option>
-                                                <form:option value="CHICKEN">CHICKEN</form:option>
-                                                <form:option value="APPETIZER">APPETIZER</form:option>
-                                                <form:option value="BEVERAGE">BEVERAGE</form:option>
-                                            </form:select>
-                                        </div>
-
-                                        <div class="col-12 col-md-3 d-flex align-items-start">
-                                            <label class="form-label m-0 mr-2">Combo:
-                                            </label>
-                                            <form:select class="form-select w-100" path="combo.shortName">
-                                                <form:option value="COMBOSS">COMBO CHẤM SƯƠNG SƯƠNG</form:option>
-                                                <form:option value="COMBOVV">COMBO CHẤM VỪA VẶN</form:option>
-                                                <form:option value="COMBONN">COMBO CHẤM NO NÊ</form:option>
-                                                <form:option value="COMBOPP">COMBO CHẤM PHỦ PHÊ</form:option>
-                                            </form:select>
+                                        <div class="col-12 col-md-6 form-group">
+                                            <label class="form-label">Price:</label>
+                                            <form:input path="price" type="text" class="form-control" />
                                         </div>
 
                                         <div class="col-12 col-md-6 mb-3 ">

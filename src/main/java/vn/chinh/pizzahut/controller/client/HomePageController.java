@@ -1,5 +1,6 @@
 package vn.chinh.pizzahut.controller.client;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,31 +14,38 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import vn.chinh.pizzahut.domain.Cart;
 import vn.chinh.pizzahut.domain.Combo;
+import vn.chinh.pizzahut.domain.Order;
 import vn.chinh.pizzahut.domain.Product;
 import vn.chinh.pizzahut.domain.User;
 import vn.chinh.pizzahut.domain.dto.RegisterDTO;
 import vn.chinh.pizzahut.domain.enums.ProductCategory;
 import vn.chinh.pizzahut.service.ComboService;
+import vn.chinh.pizzahut.service.OrderService;
 import vn.chinh.pizzahut.service.ProductService;
 import vn.chinh.pizzahut.service.UserService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomePageController {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
     private final ComboService comboService;
+    private final OrderService orderService;
     private final ProductService productService;
 
     public HomePageController(UserService userService, PasswordEncoder passwordEncoder, ComboService comboService,
-            ProductService productService) {
+            ProductService productService, OrderService orderService) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.comboService = comboService;
         this.productService = productService;
+        this.orderService = orderService;
     }
 
     @GetMapping("/")
@@ -99,6 +107,18 @@ public class HomePageController {
     @GetMapping("/access-deny")
     public String getAccessDenyPage(Model model) {
         return "client/auth/deny";
+    }
+
+    @GetMapping("/order-history")
+    public String getOrderHistoryPage(Model model, HttpServletRequest request) {
+        User user = new User();
+        HttpSession session = request.getSession();
+        long userId = (long) session.getAttribute("userId");
+        user.setId(userId);
+
+        List<Order> orders = this.orderService.fetchOrdersByUser(user);
+        model.addAttribute("orders", orders);
+        return "client/checkout/order-history";
     }
 
 }

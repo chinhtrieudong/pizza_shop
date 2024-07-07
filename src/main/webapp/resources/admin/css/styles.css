@@ -22,3 +22,8 @@
 .admin-logo {
     line-height: 41px;
 }
+
+a.active.page-link {
+    color: #fff;
+    background-color: #007bff;
+}

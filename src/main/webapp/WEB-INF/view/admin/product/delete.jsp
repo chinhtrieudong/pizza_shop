@@ -40,7 +40,7 @@
 
                             <div class="mt-5">
                                 <div class="d-flex">
-                                    <a class="btn btn-primary mr-2" href="/admin/product">Back</a>
+                                    <a class="btn btn-primary mr-2" href="/admin/product?page=1">Back</a>
                                     <h3>Delete product with id = ${product.id}</h3>
                                 </div>
                                 <hr />

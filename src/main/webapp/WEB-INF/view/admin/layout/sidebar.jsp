@@ -12,4 +12,8 @@
     <a href="/admin/combo" class="nav-item nav-link list-group-item list-group-item-action menu-items">
         <i class="fab fa-mix mr-2 fa-lg"></i>Combo
     </a>
+
+    <a href="/admin/order" class="nav-item nav-link list-group-item list-group-item-action menu-items">
+        <i class="fas fa-list mr-2 fa-lg"></i>Order
+    </a>
 </nav>

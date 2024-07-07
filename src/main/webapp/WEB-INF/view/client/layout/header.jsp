@@ -35,10 +35,10 @@
                                             <c:out value="${sessionScope.fullName}" />
                                         </span>
                                     </a>
-                                    <a class="dropdown-item user-item_option" href="#">
+                                    <a class="dropdown-item user-item_option" href="/order-history">
                                         <span class="user-item_text">
                                             <i class="item-user_icon fas fa-circle-exclamation"></i>
-                                            Your information
+                                            Lịch sử mua hàng
                                         </span>
                                     </a>
                                     <form method="post" action="/logout" class="dropdown-item user-item_option">

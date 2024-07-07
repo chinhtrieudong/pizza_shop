@@ -2,6 +2,9 @@ package vn.chinh.pizzahut.service;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import jakarta.servlet.http.HttpSession;
@@ -10,7 +13,6 @@ import vn.chinh.pizzahut.domain.CartDetail;
 import vn.chinh.pizzahut.domain.Combo;
 import vn.chinh.pizzahut.domain.Product;
 import vn.chinh.pizzahut.domain.User;
-import vn.chinh.pizzahut.domain.dto.OrderDTO;
 import vn.chinh.pizzahut.domain.enums.ProductCategory;
 import vn.chinh.pizzahut.repository.ProductRepository;
 
@@ -34,8 +36,8 @@ public class ProductService {
         this.productRepository.save(product);
     }
 
-    public List<Product> findAll() {
-        return this.productRepository.findAll();
+    public Page<Product> findAll(Pageable pageable) {
+        return this.productRepository.findAll(pageable);
     }
 
     public Optional<Product> fetchProductById(long id) {

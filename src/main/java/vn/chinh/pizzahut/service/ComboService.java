@@ -2,6 +2,8 @@ package vn.chinh.pizzahut.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import vn.chinh.pizzahut.domain.Combo;
@@ -13,6 +15,10 @@ public class ComboService {
 
     public ComboService(ComboRepository comboRepository) {
         this.comboRepository = comboRepository;
+    }
+
+    public Page<Combo> findAll(Pageable pageable) {
+        return this.comboRepository.findAll(pageable);
     }
 
     public List<Combo> fetchAllCombos() {

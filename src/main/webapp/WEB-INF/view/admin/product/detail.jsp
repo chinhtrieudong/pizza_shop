@@ -37,7 +37,7 @@
                         </nav>
                         <div class="card mt-5 w-100">
                             <div class="card-header">
-                                <a class="btn btn-primary" href="/admin/product">Back</a>
+                                <a class="btn btn-primary" href="/admin/product?page=1">Back</a>
                                 product with id = ${product.id}
                             </div>
                             <div class="card-body">

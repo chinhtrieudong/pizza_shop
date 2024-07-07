@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import vn.chinh.pizzahut.domain.Role;
 import vn.chinh.pizzahut.domain.User;
 import vn.chinh.pizzahut.domain.dto.RegisterDTO;
+import vn.chinh.pizzahut.domain.enums.OrderStatus;
+import vn.chinh.pizzahut.repository.OrderRepository;
+import vn.chinh.pizzahut.repository.ProductRepository;
 import vn.chinh.pizzahut.repository.RoleRepository;
 import vn.chinh.pizzahut.repository.UserRepository;
 
@@ -15,10 +18,15 @@ import vn.chinh.pizzahut.repository.UserRepository;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final OrderRepository orderRepository;
+    private final ProductRepository productRepository;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, OrderRepository orderRepository,
+            ProductRepository productRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.orderRepository = orderRepository;
+        this.productRepository = productRepository;
     }
 
     public void handleSaveUser(User user) {
@@ -63,5 +71,21 @@ public class UserService {
 
     public void save(User user) {
         this.userRepository.save(user);
+    }
+
+    public long countUsers() {
+        return this.userRepository.count();
+    }
+
+    public long countProducts() {
+        return this.productRepository.count();
+    }
+
+    public long countOrders() {
+        return this.orderRepository.count();
+    }
+
+    public long countDeliveries() {
+        return this.orderRepository.countByStatus(OrderStatus.PROCESSING);
     }
 }

@@ -13,4 +13,9 @@ $(document).ready(function () {
             link.removeClass('active');
         }
     });
+
+    $('button.btn.btn-danger').on('click', function () {
+        var orderId = $(this).closest('tr').find('th:first').text();
+        $('#deleteOrderLink').attr('href', '/admin/order/delete/' + orderId);
+    });
 });
